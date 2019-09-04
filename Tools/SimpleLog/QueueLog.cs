@@ -11,7 +11,7 @@ namespace SimpleLog
     public class QueueLog
     {
         private static SimpleLogQueue log = SimpleLogQueue.Instance;
-
+        
         public static void Info(string msg)
         {
             log.Log(msg, LogType.Info);
@@ -31,10 +31,12 @@ namespace SimpleLog
         {
             log.Log(msg, LogType.Error);
         }
-
         public static void Custom(string msg, string FlieName)
         {
             log.Log(msg, LogType.Other, FlieName);
+        }
+        public static void SetLogger(ILog logger) {
+            log.SetLogger(logger);
         }
     }
 

@@ -5,5 +5,6 @@ namespace SimpleLog
 	{
 		void Log(string msg, string FileName, DateTime logDate);
 		void Close();
+        void SetBasePath(string basePath);
 	}
 }

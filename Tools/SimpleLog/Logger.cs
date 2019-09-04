@@ -10,7 +10,7 @@ namespace SimpleLog
 	/// </summary>
 	public class Logger : ILog
 	{
-		static readonly string BasePath = AppDomain.CurrentDomain.BaseDirectory;
+		static string BasePath = AppDomain.CurrentDomain.BaseDirectory;
 	    static StreamWriter sw = null;
 		/// <summary>
 		/// 日志
@@ -50,13 +50,16 @@ namespace SimpleLog
 			}
 		}
 		public void Close(){}
+        public void SetBasePath(string basePath) {
+            BasePath = basePath;
+        }
 	}
 	/// <summary>
 	/// 多次连续日志一个IO流
 	/// </summary>
 	public class Logger2 : ILog, IDisposable
 	{
-		readonly string BasePath = AppDomain.CurrentDomain.BaseDirectory;
+	    string BasePath = AppDomain.CurrentDomain.BaseDirectory;
 		StreamWriter sw = null;
 		string PahtTemp = "";
 		/// <summary>
@@ -102,8 +105,12 @@ namespace SimpleLog
 				PahtTemp = "";
 			}
 		}
-		#region IDisposable Support
-		private bool disposedValue = false; // 要检测冗余调用
+        public void SetBasePath(string basePath)
+        {
+            BasePath = basePath;
+        }
+        #region IDisposable Support
+        private bool disposedValue = false; // 要检测冗余调用
 		protected virtual void Dispose(bool disposing)
 		{
 			if (!disposedValue)
