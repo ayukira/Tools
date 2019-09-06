@@ -16,7 +16,12 @@ namespace AutofacTool
         {
             using (var scope = Autofac.Container.BeginLifetimeScope())
             {
-                _database = scope.Resolve<IDataBase>(new NamedParameter("type", "Test_"));
+                _database = scope.ResolveOptional<IDataBase>(new NamedParameter("type", "Test_"));
+                if (scope.TryResolve<IDataBase>(out _database))
+                {
+                    // Do something with the resolved provider value.
+                }
+
             }
         }
         public void Create()
