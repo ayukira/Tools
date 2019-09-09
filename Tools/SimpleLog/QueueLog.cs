@@ -1,8 +1,9 @@
-﻿/// <summary>
+﻿using SimpleLog;
+/// <summary>
 ///  简单日志队列 yzm 2019/06/25
 ///  日志处理速度需要优化，如IO批量处理，同时写入多个日志，减少IO流的频繁打开关闭 
 /// </summary>
-namespace SimpleLog
+namespace Tools
 {
     #region 调用日志方法
     /// <summary>
