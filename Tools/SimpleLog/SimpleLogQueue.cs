@@ -22,7 +22,7 @@ namespace SimpleLog
 				Run();
 			}
 		}
-		private void Run()
+		private async void Run()
 		{
 			if (Logs.IsEmpty)
 			{
@@ -31,7 +31,7 @@ namespace SimpleLog
 			}
 			else
 			{
-				Task.Run(() => {
+                await Task.Run(() => {
 					//ILog logger = new Logger2();// 多次连续日志一个IO流
 					//ILog logger = new Logger(); //一次日志一个IO流                    
 					while (!Logs.IsEmpty)
@@ -42,10 +42,10 @@ namespace SimpleLog
 							log.LogAction(logger);
 						}
 					}
-					logger.Close();
-					IsRun = false;
 				});
-			}
+                logger.Close();
+                IsRun = false;
+            }
 			return;
 		}
 

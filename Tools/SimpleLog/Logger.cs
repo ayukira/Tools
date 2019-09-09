@@ -83,7 +83,11 @@ namespace SimpleLog
                 {
                     Directory.CreateDirectory(filePath);
                 }
-
+                if (string.IsNullOrWhiteSpace(PahtTemp))
+                {
+                    PahtTemp = filePath;
+                    sw = File.AppendText(totalPath);
+                }
                 if (filePath != PahtTemp)
                 {
                     PahtTemp = filePath;
