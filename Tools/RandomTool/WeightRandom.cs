@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace Tools
 {
@@ -10,7 +11,7 @@ namespace Tools
         /// </summary>
         /// <param name="list">原始列表</param>
         /// <returns></returns>
-        public static object Random(List<WeightObj> list, Random random=null)
+        public static object Random(List<WeightObj> list, Random random = null)
         {
             if (list == null)
             {
@@ -18,9 +19,9 @@ namespace Tools
             }
             if (random == null)
             {
-                random = new Random(Guid.NewGuid().GetHashCode()); 
+                random = new Random(Guid.NewGuid().GetHashCode());
             }
-            //list = list.OrderBy(x =>int.Parse(x.item.ToString())).ToList(); //对随机列表进行排序
+            list = list.OrderBy(x =>Guid.NewGuid()).ToList(); //对随机列表进行排序
             //计算权重总和
             int totalWeights = 0;
             for (int i = 0; i < list.Count; i++)

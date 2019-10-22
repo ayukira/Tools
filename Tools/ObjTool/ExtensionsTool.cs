@@ -27,6 +27,19 @@ namespace Tools
             }
             return t;
         }
+        /// <summary>
+        /// ForEach扩展,空处理
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="list"></param>
+        /// <param name="action"></param>
+        public static void ForEachEx<T>(this List<T> list,Action<T> action) 
+        {
+            if (list != null) 
+            {
+                list.ForEach(action);
+            }
+        }
     }
 
     public static class DateExtensions
