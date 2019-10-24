@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 
 namespace Tools
@@ -33,15 +34,14 @@ namespace Tools
         /// <typeparam name="T"></typeparam>
         /// <param name="list"></param>
         /// <param name="action"></param>
-        public static void ForEachEx<T>(this List<T> list,Action<T> action) 
+        public static void ForEachEx<T>(this List<T> list, Action<T> action)
         {
-            if (list != null) 
+            if (list != null)
             {
                 list.ForEach(action);
             }
         }
     }
-
     public static class DateExtensions
     {
         /// <summary>
@@ -65,7 +65,6 @@ namespace Tools
             return ts.Milliseconds;
         }
     }
-
     public static class StringExtensions
     {
         /// <summary>
@@ -93,6 +92,7 @@ namespace Tools
         /// <returns></returns>
         public static List<T> ToList<T>(this T[] arr)
         {
+            if (arr == null) return null;
             List<T> list = new List<T>();
             for (int i = 0; i < arr.Length; i++)
             {
@@ -100,29 +100,167 @@ namespace Tools
             }
             return list;
         }
+        public static T[] ArrayAdd<T>(this T[] arr1, T[] arr2)
+        {
+            if (arr1 == null) return arr1;
+            if (arr2 == null) return arr1;
+            if (arr2.Length <= 0) return arr1;
+            int index = arr1.Length + arr2.Length;
+            var newArr = new T[index];
+            arr1.CopyTo(newArr, 0);
+            arr2.CopyTo(newArr, arr1.Length);
+            return newArr;
+        }
+        /// <summary>
+        /// 截取数组元素,Span方式操作数组
+        /// </summary>
+        /// <typeparam name="T">泛型</typeparam>
+        /// <param name="arr">原数组</param>
+        /// <param name="start">开始下标</param>
+        /// <param name="lenght">截取长度</param>
+        /// <returns></returns>
+        public static T[] SliceSpan<T>(this T[] arr, int start, int lenght)
+        {
+            if (arr == null) return null;
+            if (arr.Length < lenght - start) return arr;
+            return arr.AsSpan().Slice(start, lenght).ToArray();
+        }
+        /// <summary>
+        /// 截取数组元素,Span方式操作数组
+        /// </summary>
+        /// <typeparam name="T">泛型</typeparam>
+        /// <param name="arr">原数组</param>
+        /// <param name="start">开始下标</param>
+        /// <returns></returns>
+        public static T[] SliceSpan<T>(this T[] arr, int start)
+        {
+            if (arr == null) return null;
+            return arr.AsSpan().Slice(start).ToArray();
+        }
+        /// <summary>
+        /// 裁剪数组元素,Span方式操作数组
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="arr">原数组</param>
+        /// <param name="start">起始下标</param>
+        /// <param name="end">结束下标</param>
+        /// <returns></returns>
+        public static T[] CutSpan<T>(this T[] arr, int start, int end)
+        {
+            if (arr == null) return null;
+            if (end < start) return arr;
+            if (start < 0) start = 0;
+            if (end > arr.Length - 1) end = arr.Length - 1;
+            return arr.AsSpan().Slice(start, end - start + 1).ToArray();
+        }
+        /// <summary>
+        /// 合并两个数组,通过Linq.Concat()
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="arr1">原数组</param>
+        /// <param name="arr2">新增数组</param>
+        /// <returns></returns>
+        private static IEnumerable<T> AppendLinq<T>(this IEnumerable<T> arr1, T[] arr2)
+        {
+            return arr1.Concat(arr2);
+        }
+        /// <summary>
+        /// 合并两个数组,通过CopyTo()
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="arr1">原数组</param>
+        /// <param name="arr2">新增数组</param>
+        /// <returns></returns>
+        private static T[] Append<T>(this T[] arr1, T[] arr2)
+        {
+            int index = arr1.Length + arr2.Length;
+            var arr = new T[index];
+            arr1.CopyTo(arr, 0);
+            arr2.CopyTo(arr, arr1.Length);
+            return arr;
+        }
+        /// <summary>
+        /// 数组合并，通过Linq.Concat()，已做空处理
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="array">原数组</param>
+        /// <param name="arrList">新增数组</param>
+        /// <returns></returns>
+        public static T[] AddByLq<T>(this T[] array, params T[][] arrList)
+        {
+            if (array == null) return array;
+            if (arrList == null) return array;
+            if (arrList.Length <= 0) return array;
+            IEnumerable<T> result = array;
+            foreach (var arr in arrList)
+            {
+                if (arr != null)
+                {
+                    result = result.AppendLinq(arr);
+                }
+            }
+            return result.ToArray();
+        }
+        /// <summary>
+        /// 数组合并 ,通过CopyTo(),已做空处理
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="array">原数组</param>
+        /// <param name="arrList">新增数组</param>
+        /// <returns></returns>
+        public static T[] Add<T>(this T[] array, params T[][] arrList)
+        {
+            if (array == null) return array;
+            if (arrList == null) return array;
+            if (arrList.Length <= 0) return array;
+            T[] result = array;
+            foreach (var arr in arrList)
+            {
+                if (arr != null)
+                {
+                    result = result.Append(arr);
+                }
+            }
+            return result;
+        }
     }
-    public static class ListExtensions {
-
-        public static ConcurrentQueue<T> ToSaveQueue<T>(List<T> list) {
+    public static class ListExtensions
+    {
+        /// <summary>
+        /// List转线程安全ConcurrentQueue队列
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="list"></param>
+        /// <returns></returns>
+        public static ConcurrentQueue<T> ToSaveQueue<T>(List<T> list)
+        {
             ConcurrentQueue<T> queue = new ConcurrentQueue<T>();
-            if (list != null) {
-                list.ForEach(x => {
+            if (list != null)
+            {
+                list.ForEach(x =>
+                {
                     queue.Enqueue(x);
                 });
             }
-            return queue;            
+            return queue;
         }
+        /// <summary>
+        /// List转线程安全ConcurrentBag,无序集
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="list"></param>
+        /// <returns></returns>
         public static ConcurrentBag<T> ToSaveBag<T>(List<T> list)
         {
             ConcurrentBag<T> bag = new ConcurrentBag<T>();
             if (list != null)
             {
-                list.ForEach(x => {
+                list.ForEach(x =>
+                {
                     bag.Add(x);
                 });
             }
             return bag;
         }
-        
     }
 }
