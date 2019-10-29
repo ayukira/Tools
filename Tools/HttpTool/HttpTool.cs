@@ -6,7 +6,7 @@ using Microsoft.Extensions.DependencyInjection;
 namespace Tools
 {
     /// <summary>
-    /// 可创建HttpClinet的FactoryTool
+    /// 可创建HttpClinet的FactoryTool,只适用于Net Core 2.1以上版本
     /// </summary>
     public class HttpTool
     {
@@ -26,7 +26,7 @@ namespace Tools
         /// </summary>
         /// <param name="uri"></param>
         /// <returns></returns>
-        public static async Task<string> GetAsync(string uri)
+        public async Task<string> GetAsync(string uri)
         {
             HttpClient httpClient = _httpClientFactory.CreateClient();
             var response = await httpClient.GetAsync(uri);
@@ -38,7 +38,7 @@ namespace Tools
         /// <param name="uri"></param>
         /// <param name="httpContent">请求Content</param>
         /// <returns></returns>
-        public static async Task<string> PostAsync(string uri, HttpContent httpContent)
+        public async Task<string> PostAsync(string uri, HttpContent httpContent)
         {
             HttpClient httpClient = _httpClientFactory.CreateClient();
             var response = await httpClient.PostAsync(uri, httpContent);
@@ -49,7 +49,7 @@ namespace Tools
         /// </summary>
         /// <param name="name">ClinetName</param>
         /// <returns></returns>
-        public static HttpClient GetHttpClient(string name="")
+        public HttpClient GetHttpClient(string name="")
         {
             if(string.IsNullOrWhiteSpace(name))
                 name= Microsoft.Extensions.Options.Options.DefaultName;
