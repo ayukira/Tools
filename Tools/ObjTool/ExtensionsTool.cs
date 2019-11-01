@@ -180,7 +180,7 @@ namespace Tools
             return arr;
         }
         /// <summary>
-        /// 数组合并，通过Linq.Concat()，已做空处理
+        /// 数组合并,通过Linq.Concat(),数组较小,较少时请使用Add()方法,已做空处理
         /// </summary>
         /// <typeparam name="T"></typeparam>
         /// <param name="array">原数组</param>
@@ -202,7 +202,7 @@ namespace Tools
             return result.ToArray();
         }
         /// <summary>
-        /// 数组合并 ,通过CopyTo(),已做空处理
+        /// 数组合并 ,通过CopyTo(),数组较大,较大时请使用AddByLq()方法,已做空处理
         /// </summary>
         /// <typeparam name="T"></typeparam>
         /// <param name="array">原数组</param>
