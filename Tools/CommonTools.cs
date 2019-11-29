@@ -8,7 +8,7 @@ namespace Tools
 {
     public static class CommonTools
     {
-        public static Random GetRandom ()
+        public static Random GetRandom()
         {
             Random r = new Random(Guid.NewGuid().GetHashCode());
             return r;
@@ -23,7 +23,6 @@ namespace Tools
         /// <returns></returns>
         public static string AutoBase16Encrypt(string str, string[] autoCode = null)
         {
-            string innerStr = string.Empty;
             StringBuilder strEn = new StringBuilder();
             if (autoCode == null || autoCode.Length < 16)
                 autoCode = new string[] { "a", "2", "B", "g", "E", "5", "f", "6", "C", "8", "o", "9", "Z", "p", "k", "M" };
@@ -47,7 +46,7 @@ namespace Tools
         public static string AutoBase16Decrypt(string str, string[] autoCode = null)
         {
             int k = 0;
-            string dnStr = string.Empty;
+            string dnStr;
             int strLength = str.Length;
             if (autoCode == null || autoCode.Length < 16)
                 autoCode = new string[] { "a", "2", "B", "g", "E", "5", "f", "6", "C", "8", "o", "9", "Z", "p", "k", "M" };
@@ -83,8 +82,9 @@ namespace Tools
             for (int i = 0; i < s.Length; i++)
             {
                 // 将得到的字符串使用十六进制类型格式。格式后的字符是小写的字母，如果使用大写（X）则格式后的字符是大写字符 
-                pwd = pwd + s[i].ToString("X");
+                pwd += s[i].ToString("X");
             }
+            md5.Dispose();
             return pwd.ToLower();
         }
         /// <summary>
@@ -110,7 +110,7 @@ namespace Tools
                 {
                     sBuilder.Append(data[i].ToString("x2"));
                 }
-
+                md5Hasher.Dispose();
                 // Return the hexadecimal string.
                 return sBuilder.ToString().ToLower();
             }
@@ -126,7 +126,7 @@ namespace Tools
         /// <returns></returns>
         public static string Xor(string input)
         {
-            string ouput = "";
+            string ouput;
             char[] a = input.ToCharArray();
             char[] b = new char[a.Count()];
             for (int i = 0; i < a.Count(); i++)
@@ -160,26 +160,32 @@ namespace Tools
         #endregion
 
         #region Exchange
-
         public static int ToInt(string value, int defvalue = 0)
         {
-            int result = defvalue;
-            int.TryParse(value, out result);
+            var _=int.TryParse(value, out int result);
+            if(!_)
+            {
+                result = defvalue;
+            }
             return result;
         }
         public static long ToInt64(string value, long defvalue = 0)
         {
-            long result = defvalue;
-            long.TryParse(value, out result);
+            var _ = long.TryParse(value, out long result);
+            if (!_)
+            {
+                result = defvalue;
+            }
             return result;
         }
-        public static DateTime ToDateTime(string value) {
+        public static DateTime ToDateTime(string value)
+        {
             return ToDateTime(value, DateTime.MinValue);
         }
         public static DateTime ToDateTime(string value, DateTime defvalue)
         {
-            DateTime result = defvalue;
-            DateTime.TryParse(value, out result);
+            var _ = DateTime.TryParse(value, out DateTime result);
+            if (!_) { result = defvalue; }
             return result;
         }
         public static decimal ToDecimal(string value)
@@ -188,8 +194,7 @@ namespace Tools
         }
         public static decimal ToDecimal(string value, decimal defvalue)
         {
-            decimal result;
-            if (decimal.TryParse(value, out result))
+            if (decimal.TryParse(value, out decimal result))
             {
                 return result;
             }

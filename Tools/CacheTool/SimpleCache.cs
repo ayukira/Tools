@@ -82,14 +82,13 @@ namespace Tools
         /// <param name="ExprieTime">失效时间 TimeSpan</param>
         public override void Set(string key, object value, TimeSpan ExprieTime)
         {
-            TimeSpan ts = new TimeSpan();
             if (value == null)
             {
                 return;
                 throw new Exception("Can not insert null values to the cache!");
             }
             var cachePolicy = new CacheItemPolicy();
-            ts = ExprieTime;
+            TimeSpan ts = ExprieTime;
             cachePolicy.AbsoluteExpiration = DateTimeOffset.Now.Add(ts);
             _memoryCache.Set(key, value, cachePolicy);
         }
@@ -128,5 +127,4 @@ namespace Tools
             _memoryCache =  new MemoryCache(CacheString);
         }
     }
-
 }

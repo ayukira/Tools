@@ -9,7 +9,7 @@ namespace Tools
     public static class ObjExtensions
     {
         /// <summary>
-        /// 简单Copy对象,只Copy公共可写属性，且对象有构造方法 
+        /// 简单Copy对象,只Copy公共可写属性，且对象有公共构造方法 
         /// </summary>
         /// <typeparam name="T">对象泛型</typeparam>
         /// <param name="obj">需要Copy的对象</param>
@@ -44,6 +44,7 @@ namespace Tools
     }
     public static class DateExtensions
     {
+        private readonly static DateTime _dt1970 = new DateTime(1970, 1, 1);
         /// <summary>
         /// 时间转 yyyy-MM-dd HH:mm:ss
         /// </summary>
@@ -60,9 +61,18 @@ namespace Tools
         /// <returns></returns>
         public static long ToTimeStamp(this DateTime date)
         {
-            DateTime DateMin = new DateTime(1970, 1, 1);
-            TimeSpan ts = date.ToLocalTime() - DateMin.ToLocalTime();
-            return ts.Milliseconds;
+            TimeSpan ts = date.ToLocalTime().Subtract(_dt1970.ToLocalTime());
+            return Convert.ToInt64(ts.TotalMilliseconds);
+        }
+        /// <summary>
+        /// 时间转秒时间戳
+        /// </summary>
+        /// <param name="date"></param>
+        /// <returns></returns>
+        public static int ToTimeStampSecond(this DateTime date)
+        {
+            TimeSpan ts = date.ToLocalTime().Subtract(_dt1970.ToLocalTime());
+            return Convert.ToInt32(ts.TotalSeconds);
         }
     }
     public static class StringExtensions
