@@ -1,4 +1,4 @@
-﻿using System.Configuration;
+using System.Configuration;
 
 namespace Tools
 {
@@ -13,7 +13,7 @@ namespace Tools
         {
             return new DbHelperSQL(Context);
         }
-        public string GetDbContext(string DbName) 
+        public string GetDbContext(string DbName)
         {
             string Context = string.Empty;
             Context = ConfigurationManager.ConnectionStrings[DbName].ConnectionString.ToString();

@@ -1,20 +1,18 @@
-﻿using System;
+using System;
 
 namespace Tools
 {
     public abstract class CacheBase : ICache
     {
         protected readonly object SyncObj = new object();
-        protected CacheBase()
-        {
-        }
+        protected CacheBase() { }
         public virtual object Get(string key, Func<string, object> factory)
         {
             var cacheKey = key;
             var item = this.GetOrDefault(key);
             if (item == null)
             {
-                lock (this.SyncObj)// TODO： 为何要锁定
+                lock (this.SyncObj) // TODO： 为何要锁定
                 {
                     item = this.GetOrDefault(key);
                     if (item != null)
@@ -48,8 +46,6 @@ namespace Tools
         public abstract void Set(string key, object value, TimeSpan ExprieTime);
         public abstract void Remove(string key);
         public abstract void Clear();
-        public virtual void Dispose()
-        {
-        }
+        public virtual void Dispose() { }
     }
 }

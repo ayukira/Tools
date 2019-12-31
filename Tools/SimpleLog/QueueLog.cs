@@ -1,4 +1,4 @@
-﻿using SimpleLog;
+using SimpleLog;
 /// <summary>
 ///  简单日志队列 yzm 2019/06/25
 ///  日志处理速度需要优化，如IO批量处理，同时写入多个日志，减少IO流的频繁打开关闭 
@@ -12,23 +12,24 @@ namespace Tools
     public class QueueLog
     {
         private static SimpleLogQueue log = SimpleLogQueue.Instance;
-        
+
         public static void Info(string msg)
         {
             log.Log(msg, LogType.Info);
         }
-		public static void Sql(string msg)
-		{
-			log.Log(msg, LogType.SQL);
-		}
-		public static void Debug(string msg) {
-			log.Log(msg, LogType.DeBug);
-		}
-		public static void Warn(string msg)
-		{
-			log.Log(msg, LogType.Warn);
-		}
-		public static void Error(string msg)
+        public static void Sql(string msg)
+        {
+            log.Log(msg, LogType.SQL);
+        }
+        public static void Debug(string msg)
+        {
+            log.Log(msg, LogType.DeBug);
+        }
+        public static void Warn(string msg)
+        {
+            log.Log(msg, LogType.Warn);
+        }
+        public static void Error(string msg)
         {
             log.Log(msg, LogType.Error);
         }
@@ -36,7 +37,8 @@ namespace Tools
         {
             log.Log(msg, LogType.Other, FlieName);
         }
-        public static void SetLogger(ILog logger) {
+        public static void SetLogger(ILog logger)
+        {
             log.SetLogger(logger);
         }
     }

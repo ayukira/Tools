@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -21,7 +21,7 @@ namespace Tools
             {
                 random = new Random(Guid.NewGuid().GetHashCode());
             }
-            list = list.OrderBy(x =>Guid.NewGuid()).ToList(); //对随机列表进行排序
+            list = list.Where(x => x.Weight >= 0).OrderBy(x => Guid.NewGuid()).ToList(); //对随机列表进行排序
             //计算权重总和
             int totalWeights = 0;
             for (int i = 0; i < list.Count; i++)
@@ -42,11 +42,10 @@ namespace Tools
         }
         public static T Example<T>()
         {
-            List<WeightObj> ranObj = new List<WeightObj>
-            {
-                new WeightObj() { Item = 1, Weight = 0 },
-                new WeightObj() { Item = 2, Weight = 5 },
-                new WeightObj() { Item = 3, Weight = 10 }
+            List<WeightObj> ranObj = new List<WeightObj> {
+                new WeightObj () { Item = 1, Weight = 0 },
+                new WeightObj () { Item = 2, Weight = 5 },
+                new WeightObj () { Item = 3, Weight = 10 }
             };
 
             var CurItem = Random(ranObj);

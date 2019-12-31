@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using Autofac;
 
@@ -9,8 +9,8 @@ namespace AutofacTool
         AutofacConfig Autofac = new ExAutofac();
         IDataBase _database;
         public IocTest()
-        {           
-            Resolve();//解析
+        {
+            Resolve(); //解析
         }
         public void Resolve()
         {

@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Runtime.Caching;
 
 namespace Tools
@@ -8,9 +8,9 @@ namespace Tools
     /// </summary>
     public class SimpleCache : CacheBase
     {
-        private const string CacheString= "SimpleCache";
+        private const string CacheString = "SimpleCache";
         private MemoryCache _memoryCache = new MemoryCache(CacheString);
-        private static Lazy<SimpleCache> _instance = new Lazy<SimpleCache>(() => { return new SimpleCache(); }, true);   
+        private static Lazy<SimpleCache> _instance = new Lazy<SimpleCache>(() => { return new SimpleCache(); }, true);
         private SimpleCache() : base() { }
         /// <summary>
         /// 获取缓存实例
@@ -116,7 +116,7 @@ namespace Tools
         {
             // 将原来的释放，并新建一个cache
             _memoryCache.Dispose();
-            _memoryCache =  new MemoryCache(CacheString); 
+            _memoryCache = new MemoryCache(CacheString);
         }
         /// <summary>
         /// 回收整个缓存
@@ -124,7 +124,7 @@ namespace Tools
         public override void Dispose()
         {
             _memoryCache.Dispose();
-            _memoryCache =  new MemoryCache(CacheString);
+            _memoryCache = new MemoryCache(CacheString);
         }
     }
 }

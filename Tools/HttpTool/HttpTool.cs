@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Net.Http;
 using System.Threading.Tasks;
 using Microsoft.Extensions.DependencyInjection;
@@ -49,10 +49,10 @@ namespace Tools
         /// </summary>
         /// <param name="name">ClinetName</param>
         /// <returns></returns>
-        public HttpClient GetHttpClient(string name="")
+        public HttpClient GetHttpClient(string name = "")
         {
-            if(string.IsNullOrWhiteSpace(name))
-                name= Microsoft.Extensions.Options.Options.DefaultName;
+            if (string.IsNullOrWhiteSpace(name))
+                name = Microsoft.Extensions.Options.Options.DefaultName;
             return _httpClientFactory.CreateClient(name);
         }
     }

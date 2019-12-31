@@ -1,8 +1,8 @@
-﻿using CSRedis;
 using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
+using CSRedis;
 
 namespace CSRedisTool
 {
@@ -22,14 +22,14 @@ namespace CSRedisTool
         {
             //普通kv 
             var result1 = redis.CacheShell("key1", 10, () =>
-                 {
-                     return DateTime.Now;
-                 });
+            {
+                return DateTime.Now;
+            });
             //hash数据
             var result2 = redis.CacheShell("key2", "time", 10, () =>
-              {
-                  return DateTime.Now;
-              });
+            {
+                return DateTime.Now;
+            });
         }
         /// <summary>
         /// 普通Model Hash
@@ -50,17 +50,17 @@ namespace CSRedisTool
         /// <typeparam name="T"></typeparam>
         /// <param name="modelKey"></param>
         /// <returns></returns>
-        public static T GetHash<T>(string modelKey) where T:new()
+        public static T GetHash<T>(string modelKey) where T : new()
         {
             var dics = redis.HGetAll(modelKey);
-            if (dics == null || dics.Count <= 0) 
+            if (dics == null || dics.Count <= 0)
             {
                 return default;
             }
             T model = new T();
-            foreach (var p in typeof(T).GetProperties()) 
+            foreach (var p in typeof(T).GetProperties())
             {
-                if (p.CanWrite&&dics.TryGetValue(p.Name, out string value)) 
+                if (p.CanWrite && dics.TryGetValue(p.Name, out string value))
                 {
                     p.SetValue(model, Convert.ChangeType(value, p.PropertyType));
                 }
@@ -71,7 +71,7 @@ namespace CSRedisTool
         /// HashMap缓存删除
         /// </summary>
         /// <param name="key"></param>
-        public static void HashMDel(string key) 
+        public static void HashMDel(string key)
         {
             redis.Expire(key, -1);
         }
@@ -83,7 +83,7 @@ namespace CSRedisTool
         /// <param name="timeoutSeconds"></param>
         /// <param name="func"></param>
         /// <returns></returns>
-        public static T HashCache<T>(string key, int timeoutSeconds, Func<T> func) where T : class ,new()
+        public static T HashCache<T>(string key, int timeoutSeconds, Func<T> func) where T : class, new()
         {
             T ret = new T();
             Type type = typeof(T);
@@ -92,11 +92,11 @@ namespace CSRedisTool
             if (objs != null)
             {
                 var pros = type.GetProperties();
-                foreach (var obj in objs) 
+                foreach (var obj in objs)
                 {
                     foreach (var p in pros)
                     {
-                        if (p.CanWrite&& p.Name == obj.key)
+                        if (p.CanWrite && p.Name == obj.key)
                         {
                             var name = obj.key;
                             var value = Convert.ChangeType(obj.value, p.PropertyType);
@@ -117,7 +117,7 @@ namespace CSRedisTool
             List<string> result = new List<string>();
             foreach (var property in type.GetProperties())
             {
-                if(property.CanWrite)
+                if (property.CanWrite)
                     result.Add(property.Name);
             }
             return result.ToArray();
@@ -141,4 +141,3 @@ namespace CSRedisTool
         public DateTime Time { get; set; }
     }
 }
-

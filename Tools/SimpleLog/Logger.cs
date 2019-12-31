@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.IO;
 
 namespace SimpleLog
@@ -23,7 +23,7 @@ namespace SimpleLog
             try
             {
                 string path = BasePath;
-                string filePath = path + "\\Log\\" + FileName;
+                string filePath = Path.Combine(path, "Log", FileName);
                 string fileName = $"{dtf}.log";
                 string totalPath = Path.Combine(filePath, fileName);
 
@@ -75,7 +75,7 @@ namespace SimpleLog
             try
             {
                 string path = BasePath;
-                string filePath = path + "\\Log\\" + FileName;
+                string filePath = Path.Combine(path, "Log", FileName); ;
                 string fileName = $"{dtf}.log";
                 string totalPath = Path.Combine(filePath, fileName);
 

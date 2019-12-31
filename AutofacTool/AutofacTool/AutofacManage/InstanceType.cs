@@ -1,4 +1,4 @@
-﻿namespace AutofacTool
+namespace AutofacTool
 {
     public enum InstanceType
     {

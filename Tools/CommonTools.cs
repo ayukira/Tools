@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Security.Cryptography;
@@ -148,7 +148,7 @@ namespace Tools
         public static T[] RemoveDup<T>(T[] values)
         {
             List<T> list = new List<T>();
-            for (int i = 0; i < values.Length; i++)//遍历数组成员
+            for (int i = 0; i < values.Length; i++) //遍历数组成员
             {
                 if (!list.Contains(values[i]))
                 {
@@ -162,8 +162,8 @@ namespace Tools
         #region Exchange
         public static int ToInt(string value, int defvalue = 0)
         {
-            var _=int.TryParse(value, out int result);
-            if(!_)
+            var _ = int.TryParse(value, out int result);
+            if (!_)
             {
                 result = defvalue;
             }

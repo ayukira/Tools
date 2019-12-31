@@ -1,10 +1,10 @@
-﻿/*
+/*
  * Author Github:https://github.com/2881099/csredis
  */
-using CSRedis;
 using System;
 using System.Collections.Generic;
 using System.Text;
+using CSRedis;
 
 namespace CSRedisTool
 {
@@ -34,6 +34,6 @@ namespace CSRedisTool
     }
     public static class CSRedisExtensions
     {
-       
+
     }
 }
