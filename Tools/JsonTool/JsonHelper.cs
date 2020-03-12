@@ -7,7 +7,7 @@ namespace Tools
     /// <summary>
     /// Newtonsoft.Json
     /// </summary>
-    public class JsonHelper : IJson
+    class JsonHelper : IJson
     {
         public string ObjectToJson<T>(T obj)
         {
@@ -25,7 +25,7 @@ namespace Tools
     /// <summary>
     /// Text.Json
     /// </summary>
-    public class JsonHelper2 : IJson
+    class JsonHelper2 : IJson
     {
         static System.Text.Json.JsonSerializerOptions options;
         static JsonHelper2()

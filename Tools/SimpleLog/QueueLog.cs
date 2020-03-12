@@ -42,6 +42,5 @@ namespace Tools
             log.SetLogger(logger);
         }
     }
-
     #endregion
 }
