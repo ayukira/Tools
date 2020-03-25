@@ -8,7 +8,7 @@ namespace SimpleLog
     /// <summary>
     /// 单次日一个IO流
     /// </summary>
-    public class Logger : ILog
+    public class QLogger : ILog
     {
         static string BasePath = AppDomain.CurrentDomain.BaseDirectory;
         static StreamWriter sw = null;
@@ -58,7 +58,7 @@ namespace SimpleLog
     /// <summary>
     /// 多次连续日志一个IO流
     /// </summary>
-    public class Logger2 : ILog, IDisposable
+    public class QLogger2 : ILog, IDisposable
     {
         string BasePath = AppDomain.CurrentDomain.BaseDirectory;
         StreamWriter sw = null;

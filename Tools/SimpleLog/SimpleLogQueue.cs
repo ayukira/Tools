@@ -54,7 +54,7 @@ namespace SimpleLog
         public static bool IsCreate { get { return instance.IsValueCreated; } }
         private SimpleLogQueue()
         {
-            logger = new Logger2();
+            logger = new QLogger2();
         }
         public void SetLogger(ILog log)
         {
