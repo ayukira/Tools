@@ -58,7 +58,44 @@ namespace Tools
             _memoryCache.Set(key, value, cachePolicy);
         }
         /// <summary>
-        /// 设置缓存
+        /// 设置缓存,滑动失效,多久未访问失效
+        /// </summary>
+        /// <param name="key">Key</param>
+        /// <param name="value">Obj</param>
+        /// <param name="slidingExpireTime">多久未访问则失效</param>
+        public void SetBySlid(string key, object value, TimeSpan slidingExpireTime)
+        {
+            if (value == null)
+            {
+                throw new Exception("Can not insert null values to the cache!");
+            }
+            var cachePolicy = new CacheItemPolicy();
+            cachePolicy.SlidingExpiration = slidingExpireTime;
+            _memoryCache.Set(key, value, cachePolicy);
+        }
+        /// <summary>
+        /// 设置缓存,设置失效时间
+        /// </summary>
+        /// <param name="key">Key</param>
+        /// <param name="value">Obj</param>
+        /// <param name="absoluteExpireTime">失效时间</param>
+        public void Set(string key, object value, DateTime dateTime)
+        {
+            if (value == null)
+            {
+                return;
+                throw new Exception("Can not insert null values to the cache!");
+            }
+            var now = DateTime.Now;
+            if (now > dateTime)
+            {
+                return;
+            }
+            TimeSpan ts = dateTime.Subtract(now);
+            Set(key, value, ts);
+        }
+        /// <summary>
+        /// 设置缓存,缓存时间：单位毫秒
         /// </summary>
         /// <param name="key">Key</param>
         /// <param name="value">obj</param>
@@ -75,7 +112,7 @@ namespace Tools
             _memoryCache.Set(key, value, cachePolicy);
         }
         /// <summary>
-        /// 设置缓存
+        /// 设置缓存,缓存时间：TimeSpan
         /// </summary>
         /// <param name="key">Key</param>
         /// <param name="value">Obj</param>

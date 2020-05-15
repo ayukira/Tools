@@ -94,8 +94,10 @@ namespace SimpleLog
                     Close();
                     sw = File.AppendText(totalPath);
                 }
+                //sw.AutoFlush = true;
                 string logMsg = msg;
                 sw.WriteLine(logMsg);
+                sw.Flush();
             }
             catch { }
         }
