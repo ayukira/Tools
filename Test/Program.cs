@@ -16,7 +16,7 @@ namespace Test
             //dic.Add("test", 1);
             //dic.Add("test2", 2);
             //SimpleCache.Instance.Set("dic", dic, 60 * 60 * 1000);
-            var json = SimpleJson.Inc.ObjectToJson(new { Id = 1, Name = "123" });
+            var json = SimpleJson.Inc.ObjectToJson(new { MyId = 1, MyName = "123" });
 
             Console.WriteLine(json);
             //var ab = SimpleCache.Instance.Get("dic");

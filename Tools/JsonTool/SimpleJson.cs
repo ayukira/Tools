@@ -13,7 +13,7 @@ namespace Tools
         static IJson _json;
         private SimpleJson()
         {
-            _json = new JsonHelper();
+            _json = new JsonHelper2();
         }
         public static SimpleJson Inc 
         {
@@ -36,6 +36,24 @@ namespace Tools
         public object JsonToObj(string jsonStr)
         {
             return _json.JsonToObj(jsonStr);
+        }
+    }
+    public class JosoUtil
+    {
+        //序列化
+        public static string ObjectToJson<T>(T obj)
+        {
+            return Newtonsoft.Json.JsonConvert.SerializeObject(obj);
+        }
+        // 反序列化
+        public static T JsonToModel<T>(string jsonStr)
+        {
+            return Newtonsoft.Json.JsonConvert.DeserializeObject<T>(jsonStr);
+        }
+        // 反序列化
+        public static object JsonToObj(string jsonStr)
+        {
+            return Newtonsoft.Json.JsonConvert.DeserializeObject(jsonStr);
         }
     }
 }
