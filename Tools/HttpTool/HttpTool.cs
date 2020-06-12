@@ -64,5 +64,20 @@ namespace Tools
             httpClient.DefaultRequestHeaders.Connection.Add("keep-alive");
             return httpClient;
         }
+        /// <summary>
+        /// 未实现方法，dotnet core 3.0以上才支持,需要再httpClinet使用前设置
+        /// </summary>
+        /// <param name="httpClient"></param>
+        /// <returns></returns>
+        public static HttpClient SetHttpVersion(this HttpClient httpClient,Version version = null)
+        {
+            if (version == null) 
+            {
+                version = new Version(2,0);
+            }
+            //dotnet core 3.0以上才支持
+            //httpClient.DefaultRequestVersion = new Version(2, 0);
+            return httpClient;
+        }
     }
 }
