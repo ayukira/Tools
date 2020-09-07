@@ -1,0 +1,692 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Tools</name>
+    </assembly>
+    <members>
+        <member name="M:Tools.ICache.Get(System.String,System.Func{System.String,System.Object})">
+            <summary>
+            获取缓存项，当没有缓存时，使用factory提供的值
+            </summary>
+            <param name="key"></param>
+            <param name="factory"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Tools.ICache.GetOrDefault(System.String)">
+            <summary>
+            获取缓存项，没有缓存时返回默认数据
+            </summary>
+            <param name="key"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Tools.ICache.Set(System.String,System.Object,System.Nullable{System.TimeSpan},System.Nullable{System.TimeSpan})">
+            <summary>
+            设置缓存项并设置过期时间
+            </summary>
+            <param name="key">key</param>
+            <param name="value">值</param>
+            <param name="slidingExpireTime">多久未访问则失效</param>
+            <param name="absoluteExpireTime">超时失效</param>
+        </member>
+        <member name="M:Tools.ICache.Remove(System.String)">
+            <summary>
+            移除缓存项
+            </summary>
+            <param name="key"></param>
+        </member>
+        <member name="M:Tools.ICache.Clear">
+            <summary>
+            清空缓存
+            </summary>
+        </member>
+        <member name="T:Tools.SimpleCache">
+            <summary>
+            单机简单缓存工具,不适合缓存大量数据,大量数据请使用Redis
+            </summary>
+        </member>
+        <member name="P:Tools.SimpleCache.Instance">
+            <summary>
+            获取缓存实例
+            </summary>
+        </member>
+        <member name="P:Tools.SimpleCache.IsCreate">
+            <summary>
+            检查缓存实例是否创建
+            </summary>
+        </member>
+        <member name="M:Tools.SimpleCache.GetOrDefault(System.String)">
+            <summary>
+            获取指定缓存对象
+            </summary>
+            <param name="key"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Tools.SimpleCache.Set(System.String,System.Object,System.Nullable{System.TimeSpan},System.Nullable{System.TimeSpan})">
+            <summary>
+            设置缓存
+            </summary>
+            <param name="key">Key</param>
+            <param name="value">Obj</param>
+            <param name="slidingExpireTime">多久未访问则失效</param>
+            <param name="absoluteExpireTime">超时失效</param>
+        </member>
+        <member name="M:Tools.SimpleCache.SetBySlid(System.String,System.Object,System.TimeSpan)">
+            <summary>
+            设置缓存,滑动失效,多久未访问失效
+            </summary>
+            <param name="key">Key</param>
+            <param name="value">Obj</param>
+            <param name="slidingExpireTime">多久未访问则失效</param>
+        </member>
+        <member name="M:Tools.SimpleCache.Set(System.String,System.Object,System.DateTime)">
+            <summary>
+            设置缓存,设置失效时间
+            </summary>
+            <param name="key">Key</param>
+            <param name="value">Obj</param>
+            <param name="absoluteExpireTime">失效时间</param>
+        </member>
+        <member name="M:Tools.SimpleCache.Set(System.String,System.Object,System.Int64)">
+            <summary>
+            设置缓存,缓存时间：单位毫秒
+            </summary>
+            <param name="key">Key</param>
+            <param name="value">obj</param>
+            <param name="ExprieTime">失效时间,毫秒时间戳</param>
+        </member>
+        <member name="M:Tools.SimpleCache.Set(System.String,System.Object,System.TimeSpan)">
+            <summary>
+            设置缓存,缓存时间：TimeSpan
+            </summary>
+            <param name="key">Key</param>
+            <param name="value">Obj</param>
+            <param name="ExprieTime">失效时间 TimeSpan</param>
+        </member>
+        <member name="M:Tools.SimpleCache.IsExists(System.String)">
+            <summary>
+            检查指定缓存是否存在
+            </summary>
+            <param name="key"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Tools.SimpleCache.Remove(System.String)">
+            <summary>
+            移除指定缓存
+            </summary>
+            <param name="key"></param>
+        </member>
+        <member name="M:Tools.SimpleCache.Clear">
+            <summary>
+            清除整个缓存
+            </summary>
+        </member>
+        <member name="M:Tools.SimpleCache.Dispose">
+            <summary>
+            回收整个缓存
+            </summary>
+        </member>
+        <member name="M:Tools.CommonTools.AutoBase16Encrypt(System.String,System.String[])">
+            <summary>
+            自定义Base16编码
+            </summary>
+            <param name="str">需要编码的字符串</param>
+            <param name="autoCode">自定义Base16编码数组,16个元素,可以为数字、字符、特殊符号,若不填,使用默认的Base16编码数组,解码与编码的Base16编码数组一样</param>
+            <returns></returns>
+        </member>
+        <member name="M:Tools.CommonTools.AutoBase16Decrypt(System.String,System.String[])">
+            <summary>
+            自定义Base16解码
+            </summary>
+            <param name="str">需要解码的字符串</param>
+            <param name="autoCode">自定义Base16编码数组,16个元素,可以为数字、字符、特殊符号,若不填,使用默认的Base16编码数组,解码与编码的Base16编码数组一样</param>
+            <returns></returns>
+        </member>
+        <member name="M:Tools.CommonTools.MD5Encrypt32(System.String)">
+            <summary>
+            非标准32位MD5
+            </summary>
+            <param name="password"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Tools.CommonTools.MD5Encrypt(System.String)">
+            <summary>
+            标准32位MD5
+            </summary>
+            <param name="strEnc"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Tools.CommonTools.Xor(System.String)">
+            <summary>
+            字符串简单异或运算,可逆
+            </summary>
+            <param name="input">输入字符串</param>
+            <returns></returns>
+        </member>
+        <member name="M:Tools.CommonTools.RemoveDup``1(``0[])">
+            <summary>
+            删除数组中的重复项
+            </summary>
+            <param name="values"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Tools.DbHelperSQL">
+            <summary>
+            数据访问抽象基础类
+            Copyright (C) DesayBattery
+            </summary>
+        </member>
+        <member name="M:Tools.DbHelperSQL.ColumnExists(System.String,System.String)">
+            <summary>
+            判断是否存在某表的某个字段
+            </summary>
+            <param name="tableName">表名称</param>
+            <param name="columnName">列名称</param>
+            <returns>是否存在</returns>
+        </member>
+        <member name="M:Tools.DbHelperSQL.TabExists(System.String)">
+            <summary>
+            表是否存在
+            </summary>
+            <param name="TableName"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Tools.DbHelperSQL.ExecuteSql(System.String)">
+            <summary>
+            执行SQL语句，返回影响的记录数
+            </summary>
+            <param name="SQLString">SQL语句</param>
+            <returns>影响的记录数</returns>
+        </member>
+        <member name="M:Tools.DbHelperSQL.ExecuteSqlTran(System.Collections.Generic.List{System.String})">
+            <summary>
+            执行多条SQL语句，实现数据库事务。
+            </summary>
+            <param name="SQLStringList">多条SQL语句</param>		
+        </member>
+        <member name="M:Tools.DbHelperSQL.ExecuteSql(System.String,System.String)">
+            <summary>
+            执行带一个存储过程参数的的SQL语句。
+            </summary>
+            <param name="SQLString">SQL语句</param>
+            <param name="content">参数内容,比如一个字段是格式复杂的文章，有特殊符号，可以通过这个方式添加</param>
+            <returns>影响的记录数</returns>
+        </member>
+        <member name="M:Tools.DbHelperSQL.ExecuteSqlGet(System.String,System.String)">
+            <summary>
+            执行带一个存储过程参数的的SQL语句。
+            </summary>
+            <param name="SQLString">SQL语句</param>
+            <param name="content">参数内容,比如一个字段是格式复杂的文章，有特殊符号，可以通过这个方式添加</param>
+            <returns>影响的记录数</returns>
+        </member>
+        <member name="M:Tools.DbHelperSQL.ExecuteSqlInsertImg(System.String,System.Byte[])">
+            <summary>
+            向数据库里插入图像格式的字段(和上面情况类似的另一种实例)
+            </summary>
+            <param name="strSQL">SQL语句</param>
+            <param name="fs">图像字节,数据库的字段类型为image的情况</param>
+            <returns>影响的记录数</returns>
+        </member>
+        <member name="M:Tools.DbHelperSQL.GetSingle(System.String)">
+            <summary>
+            执行一条计算查询结果语句，返回查询结果（object）。
+            </summary>
+            <param name="SQLString">计算查询结果语句</param>
+            <returns>查询结果（object）</returns>
+        </member>
+        <member name="M:Tools.DbHelperSQL.ExecuteReader(System.String)">
+            <summary>
+            执行查询语句，返回SqlDataReader ( 注意：调用该方法后，一定要对SqlDataReader进行Close )
+            </summary>
+            <param name="strSQL">查询语句</param>
+            <returns>SqlDataReader</returns>
+        </member>
+        <member name="M:Tools.DbHelperSQL.Query(System.String)">
+            <summary>
+            执行查询语句，返回DataSet
+            </summary>
+            <param name="SQLString">查询语句</param>
+            <returns>DataSet</returns>
+        </member>
+        <member name="M:Tools.DbHelperSQL.ExecuteSql(System.String,System.Data.SqlClient.SqlParameter[])">
+            <summary>
+            执行SQL语句，返回影响的记录数
+            </summary>
+            <param name="SQLString">SQL语句</param>
+            <returns>影响的记录数</returns>
+        </member>
+        <member name="M:Tools.DbHelperSQL.ExecuteSqlTran(System.Collections.Hashtable)">
+            <summary>
+            执行多条SQL语句，实现数据库事务。
+            </summary>
+            <param name="SQLStringList">SQL语句的哈希表（key为sql语句，value是该语句的SqlParameter[]）</param>
+        </member>
+        <member name="M:Tools.DbHelperSQL.ExecuteSqlTran(System.Collections.Generic.List{Tools.CommandInfo})">
+            <summary>
+            执行多条SQL语句，实现数据库事务。
+            </summary>
+            <param name="SQLStringList">SQL语句的哈希表（key为sql语句，value是该语句的SqlParameter[]）</param>
+        </member>
+        <member name="M:Tools.DbHelperSQL.ExecuteSqlTranWithIndentity(System.Collections.Generic.List{Tools.CommandInfo})">
+            <summary>
+            执行多条SQL语句，实现数据库事务。
+            </summary>
+            <param name="SQLStringList">SQL语句的哈希表（key为sql语句，value是该语句的SqlParameter[]）</param>
+        </member>
+        <member name="M:Tools.DbHelperSQL.ExecuteSqlTranWithIndentity(System.Collections.Hashtable)">
+            <summary>
+            执行多条SQL语句，实现数据库事务。
+            </summary>
+            <param name="SQLStringList">SQL语句的哈希表（key为sql语句，value是该语句的SqlParameter[]）</param>
+        </member>
+        <member name="M:Tools.DbHelperSQL.ExecuteProcedureTranWithIndentity(System.String,System.Collections.Generic.List{System.Collections.Hashtable})">
+            <summary>
+            执行多条SQL语句，实现数据库事务。
+            </summary>
+            <param name="SQLStringList">SQL语句的哈希表（key为sql语句，value是该语句的SqlParameter[]）</param>
+        </member>
+        <member name="M:Tools.DbHelperSQL.GetSingle(System.String,System.Data.SqlClient.SqlParameter[])">
+            <summary>
+            执行一条计算查询结果语句，返回查询结果（object）。
+            </summary>
+            <param name="SQLString">计算查询结果语句</param>
+            <returns>查询结果（object）</returns>
+        </member>
+        <member name="M:Tools.DbHelperSQL.ExecuteReader(System.String,System.Data.SqlClient.SqlParameter[])">
+            <summary>
+            执行查询语句，返回SqlDataReader ( 注意：调用该方法后，一定要对SqlDataReader进行Close )
+            </summary>
+            <param name="strSQL">查询语句</param>
+            <returns>SqlDataReader</returns>
+        </member>
+        <member name="M:Tools.DbHelperSQL.Query(System.String,System.Data.SqlClient.SqlParameter[])">
+            <summary>
+            执行查询语句，返回DataSet
+            </summary>
+            <param name="SQLString">查询语句</param>
+            <returns>DataSet</returns>
+        </member>
+        <member name="M:Tools.DbHelperSQL.RunProcedureReader(System.String,System.Data.IDataParameter[])">
+            <summary>
+            执行存储过程，返回SqlDataReader ( 注意：调用该方法后，一定要对SqlDataReader进行Close )
+            </summary>
+            <param name="storedProcName">存储过程名</param>
+            <param name="parameters">存储过程参数</param>
+            <returns>SqlDataReader</returns>
+        </member>
+        <member name="M:Tools.DbHelperSQL.RunProcedure(System.String,System.Data.IDataParameter[])">
+            <summary>
+            返回引响行数
+            </summary>
+            <param name="storedProcName">存储过程名</param>
+            <param name="parameters">存储过程参数</param>
+            <returns>SqlDataReader</returns>
+        </member>
+        <member name="M:Tools.DbHelperSQL.ProcedureGetOutPut(System.String,System.Data.IDataParameter[],System.String)">
+            <summary>
+            返回引响行数
+            </summary>
+            <param name="storedProcName">存储过程名</param>
+            <param name="parameters">存储过程参数</param>
+            <returns>string</returns>
+        </member>
+        <member name="M:Tools.DbHelperSQL.RunProcedure(System.String,System.Data.IDataParameter[],System.String)">
+            <summary>
+            执行存储过程
+            </summary>
+            <param name="storedProcName">存储过程名</param>
+            <param name="parameters">存储过程参数</param>
+            <param name="tableName">DataSet结果中的表名</param>
+            <returns>DataSet</returns>
+        </member>
+        <member name="M:Tools.DbHelperSQL.RunProcedureTable(System.String,System.Data.IDataParameter[])">
+            <summary>
+            执行存储过程
+            </summary>
+            <param name="storedProcName">存储过程名</param>
+            <param name="parameters">存储过程参数</param>
+            <returns>DataTable</returns>
+        </member>
+        <member name="M:Tools.DbHelperSQL.BuildQueryCommand(System.Data.SqlClient.SqlConnection,System.String,System.Data.IDataParameter[])">
+            <summary>
+            构建 SqlCommand 对象(用来返回一个结果集，而不是一个整数值)
+            </summary>
+            <param name="connection">数据库连接</param>
+            <param name="storedProcName">存储过程名</param>
+            <param name="parameters">存储过程参数</param>
+            <returns>SqlCommand</returns>
+        </member>
+        <member name="M:Tools.DbHelperSQL.RunProcedure(System.String,System.Data.IDataParameter[],System.Int32@)">
+            <summary>
+            执行存储过程，返回影响的行数		
+            </summary>
+            <param name="storedProcName">存储过程名</param>
+            <param name="parameters">存储过程参数</param>
+            <param name="rowsAffected">影响的行数</param>
+            <returns></returns>
+        </member>
+        <member name="M:Tools.DbHelperSQL.BuildIntCommand(System.Data.SqlClient.SqlConnection,System.String,System.Data.IDataParameter[])">
+            <summary>
+            创建 SqlCommand 对象实例(用来返回一个整数值)	
+            </summary>
+            <param name="storedProcName">存储过程名</param>
+            <param name="parameters">存储过程参数</param>
+            <returns>SqlCommand 对象实例</returns>
+        </member>
+        <member name="F:Tools.EffentNextType.None">
+            <summary>
+            对其他语句无任何影响 
+            </summary>
+        </member>
+        <member name="F:Tools.EffentNextType.WhenHaveContine">
+            <summary>
+            当前语句必须为"select count(1) from .."格式，如果存在则继续执行，不存在回滚事务
+            </summary>
+        </member>
+        <member name="F:Tools.EffentNextType.WhenNoHaveContine">
+            <summary>
+            当前语句必须为"select count(1) from .."格式，如果不存在则继续执行，存在回滚事务
+            </summary>
+        </member>
+        <member name="F:Tools.EffentNextType.ExcuteEffectRows">
+            <summary>
+            当前语句影响到的行数必须大于0，否则回滚事务
+            </summary>
+        </member>
+        <member name="F:Tools.EffentNextType.SolicitationEvent">
+            <summary>
+            引发事件-当前语句必须为"select count(1) from .."格式，如果不存在则继续执行，存在回滚事务
+            </summary>
+        </member>
+        <member name="T:Tools.HttpTool">
+            <summary>
+            可创建HttpClinet的FactoryTool,只适用于Net Core 2.1以上版本
+            </summary>
+        </member>
+        <member name="P:Tools.HttpTool.Instance">
+            <summary>
+            HttpClinetFactory单例
+            </summary>
+        </member>
+        <member name="M:Tools.HttpTool.GetAsync(System.String)">
+            <summary>
+            简单异步Get请求
+            </summary>
+            <param name="uri"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Tools.HttpTool.PostAsync(System.String,System.Net.Http.HttpContent)">
+            <summary>
+            简单异步Post请求
+            </summary>
+            <param name="uri"></param>
+            <param name="httpContent">请求Content</param>
+            <returns></returns>
+        </member>
+        <member name="M:Tools.HttpTool.GetHttpClient(System.String)">
+            <summary>
+            获得一个HttpClient
+            </summary>
+            <param name="name">ClinetName</param>
+            <returns></returns>
+        </member>
+        <member name="M:Tools.HttpClientExtensions.SetHttpVersion(System.Net.Http.HttpClient,System.Version)">
+            <summary>
+            未实现方法，dotnet core 3.0以上才支持,需要再httpClinet使用前设置
+            </summary>
+            <param name="httpClient"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Tools.JsonHelper">
+            <summary>
+            Newtonsoft.Json
+            </summary>
+        </member>
+        <member name="T:Tools.JsonHelper2">
+            <summary>
+            Text.Json
+            </summary>
+        </member>
+        <member name="T:Tools.DateTimeConverter">
+            <summary>
+            自定义时间格式转换
+            </summary>
+        </member>
+        <member name="T:Tools.DateTimeNullableConverter">
+            <summary>
+            自定义时间格式转换
+            </summary>
+        </member>
+        <member name="M:Tools.ObjExtensions.SimpleCopy``1(``0)">
+            <summary>
+            简单Copy对象,只Copy公共可写属性，且对象有公共构造方法 
+            </summary>
+            <typeparam name="T">对象泛型</typeparam>
+            <param name="obj">需要Copy的对象</param>
+            <returns></returns>
+        </member>
+        <member name="M:Tools.ObjExtensions.ForEachEx``1(System.Collections.Generic.List{``0},System.Action{``0})">
+            <summary>
+            ForEach扩展,空处理
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="list"></param>
+            <param name="action"></param>
+        </member>
+        <member name="M:Tools.DateExtensions.ToChString(System.DateTime)">
+            <summary>
+            时间转 yyyy-MM-dd HH:mm:ss
+            </summary>
+            <param name="date"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Tools.DateExtensions.ToTimeStamp(System.DateTime)">
+            <summary>
+            时间转毫秒时间戳
+            </summary>
+            <param name="date"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Tools.DateExtensions.ToTimeStampSecond(System.DateTime)">
+            <summary>
+            时间转秒时间戳
+            </summary>
+            <param name="date"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Tools.StringExtensions.WordCount(System.String,System.Char[])">
+            <summary>
+            计算字符串中单词数量,分割字符' ';'.';'?';';';',' 
+            </summary>
+            <param name="str"></param>
+            <param name="chars">new char[] { ' ', '.', '?',';',','}</param>
+            <returns></returns>
+        </member>
+        <member name="M:Tools.ArrayExtensions.ToList``1(``0[])">
+            <summary>
+            数组转List
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="arr"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Tools.ArrayExtensions.SliceSpan``1(``0[],System.Int32,System.Int32)">
+            <summary>
+            截取数组元素,Span方式操作数组
+            </summary>
+            <typeparam name="T">泛型</typeparam>
+            <param name="arr">原数组</param>
+            <param name="start">开始下标</param>
+            <param name="lenght">截取长度</param>
+            <returns></returns>
+        </member>
+        <member name="M:Tools.ArrayExtensions.SliceSpan``1(``0[],System.Int32)">
+            <summary>
+            截取数组元素,Span方式操作数组
+            </summary>
+            <typeparam name="T">泛型</typeparam>
+            <param name="arr">原数组</param>
+            <param name="start">开始下标</param>
+            <returns></returns>
+        </member>
+        <member name="M:Tools.ArrayExtensions.CutSpan``1(``0[],System.Int32,System.Int32)">
+            <summary>
+            裁剪数组元素,Span方式操作数组
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="arr">原数组</param>
+            <param name="start">起始下标</param>
+            <param name="end">结束下标</param>
+            <returns></returns>
+        </member>
+        <member name="M:Tools.ArrayExtensions.AppendLinq``1(System.Collections.Generic.IEnumerable{``0},``0[])">
+            <summary>
+            合并两个数组,通过Linq.Concat()
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="arr1">原数组</param>
+            <param name="arr2">新增数组</param>
+            <returns></returns>
+        </member>
+        <member name="M:Tools.ArrayExtensions.Append``1(``0[],``0[])">
+            <summary>
+            合并两个数组,通过CopyTo()
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="arr1">原数组</param>
+            <param name="arr2">新增数组</param>
+            <returns></returns>
+        </member>
+        <member name="M:Tools.ArrayExtensions.AddByLq``1(``0[],``0[][])">
+            <summary>
+            数组合并,通过Linq.Concat(),数组较小,较少时请使用Add()方法,已做空处理
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="array">原数组</param>
+            <param name="arrList">新增数组</param>
+            <returns></returns>
+        </member>
+        <member name="M:Tools.ArrayExtensions.Add``1(``0[],``0[][])">
+            <summary>
+            数组合并 ,通过CopyTo(),数组较大,较大时请使用AddByLq()方法,已做空处理
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="array">原数组</param>
+            <param name="arrList">新增数组</param>
+            <returns></returns>
+        </member>
+        <member name="M:Tools.ListExtensions.ToSaveQueue``1(System.Collections.Generic.List{``0})">
+            <summary>
+            List转线程安全ConcurrentQueue队列
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="list"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Tools.ListExtensions.ToSaveBag``1(System.Collections.Generic.List{``0})">
+            <summary>
+            List转线程安全ConcurrentBag,无序集
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="list"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Tools.ModelHandler`1.FillModel(System.Data.DataSet)">
+            <summary>
+            填充对象列表：用DataSet的第一个表填充实体类
+            </summary>
+            <param name="ds">DataSet</param>
+            <returns></returns>
+        </member>
+        <member name="M:Tools.ModelHandler`1.FillModel(System.Data.DataSet,System.Int32)">
+            <summary>  
+            填充对象列表：用DataSet的第index个表填充实体类
+            </summary>  
+        </member>
+        <member name="M:Tools.ModelHandler`1.FillModel(System.Data.DataTable)">
+            <summary>  
+            填充对象列表：用DataTable填充实体类
+            </summary>  
+        </member>
+        <member name="M:Tools.ModelHandler`1.FillModel(System.Data.DataRow)">
+            <summary>  
+            填充对象：用DataRow填充实体类
+            </summary>  
+        </member>
+        <member name="M:Tools.ModelHandler`1.FillDataSet(System.Collections.Generic.List{`0})">
+            <summary>
+            实体类转换成DataSet
+            </summary>
+            <param name="modelList">实体类列表</param>
+            <returns></returns>
+        </member>
+        <member name="M:Tools.ModelHandler`1.FillDataTable(System.Collections.Generic.List{`0})">
+            <summary>
+            实体类转换成DataTable
+            </summary>
+            <param name="modelList">实体类列表</param>
+            <returns></returns>
+        </member>
+        <member name="M:Tools.ModelHandler`1.CreateData(`0)">
+            <summary>
+            根据实体类得到表结构
+            </summary>
+            <param name="model">实体类</param>
+            <returns></returns>
+        </member>
+        <member name="T:Tools.WeightList">
+            <summary>
+            权重随机列表
+            </summary>
+        </member>
+        <member name="T:Tools.WeightObj">
+            <summary>
+            权重对象
+            </summary>
+        </member>
+        <member name="P:Tools.WeightObj.Item">
+            <summary>
+            随机对象
+            </summary>
+        </member>
+        <member name="P:Tools.WeightObj.Weight">
+            <summary>
+            权重
+            </summary>
+        </member>
+        <member name="M:Tools.WeightRandom.Random(System.Collections.Generic.List{Tools.WeightObj},System.Random)">
+            <summary>
+            带权重的随机
+            </summary>
+            <param name="list">原始列表</param>
+            <returns></returns>
+        </member>
+        <member name="T:Tools.QueueLog">
+            <summary>
+            调用日志
+            </summary>
+        </member>
+        <member name="T:SimpleLog.QLogger">
+            <summary>
+            单次日一个IO流
+            </summary>
+        </member>
+        <member name="M:SimpleLog.QLogger.Log(System.String,System.String,System.DateTime)">
+            <summary>
+            日志
+            </summary>
+            <param name="msg"></param>
+        </member>
+        <member name="T:SimpleLog.QLogger2">
+            <summary>
+            多次连续日志一个IO流
+            </summary>
+        </member>
+        <member name="M:SimpleLog.QLogger2.Log(System.String,System.String,System.DateTime)">
+            <summary>
+            日志
+            </summary>
+            <param name="msg"></param>
+        </member>
+    </members>
+</doc>

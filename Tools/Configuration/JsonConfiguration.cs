@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Configuration.Json;
+using Microsoft.Extensions.Primitives;
 
 namespace Tools
 {
@@ -17,12 +18,17 @@ namespace Tools
     }
     public class JsonConfiguration
     {
+        public Action OnChange;
         public IConfiguration Configuration { get; set; }
         public JsonConfiguration(string jsonName, bool reloadOnChange = true)
         {
             Configuration = new ConfigurationBuilder()
                 .Add(new JsonConfigurationSource { Path = $"{jsonName}.json", ReloadOnChange = reloadOnChange })
                 .Build();
+            ChangeToken.OnChange(() => Configuration.GetReloadToken(), () =>
+            {
+                OnChange?.Invoke();
+            });
         }
     }
 }
