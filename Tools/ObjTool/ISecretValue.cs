@@ -5,11 +5,16 @@ using System.Text;
 
 namespace Tools
 {
+    /// <summary>
+    /// 内存加密 float
+    /// </summary>
     public struct SecretFloat : ISecretValue<float>
     {
         private char[] _SecretValue;
         private int xor;
-
+        /// <summary>
+        /// Value float
+        /// </summary>
         public float Value { get { return SecretGet(_SecretValue); } set { _SecretValue = SecretSet(value); } }
         private float SecretGet(char[] secretValue)
         {
@@ -49,11 +54,16 @@ namespace Tools
             return ouput;
         }
     }
+    /// <summary>
+    /// 内存加密 double
+    /// </summary>
     public struct SecretDouble : ISecretValue<double>
     {
         private char[] _SecretValue;
         private int xor;
-
+        /// <summary>
+        /// Value double
+        /// </summary>
         public double Value { get { return SecretGet(_SecretValue); } set { _SecretValue = SecretSet(value); } }
         private double SecretGet(char[] secretValue)
         {
@@ -93,11 +103,16 @@ namespace Tools
             return ouput;
         }
     }
+    /// <summary>
+    /// 内存加密 int
+    /// </summary>
     public struct SecretInt : ISecretValue<int>
     {
         private int _SecretValue;
         private int xor;
-
+        /// <summary>
+        /// Value int
+        /// </summary>
         public int Value { get { return SecretGet(_SecretValue); } set { _SecretValue = SecretSet(value); } }
         private int SecretGet(int secretValue)
         {
@@ -113,11 +128,16 @@ namespace Tools
             return xor;
         }
     }
+    /// <summary>
+    /// 内存加密 long
+    /// </summary>
     public struct SecretLong : ISecretValue<long>
     {
         private long _SecretValue;
         private int xor;
-
+        /// <summary>
+        /// Value long
+        /// </summary>
         public long Value { get { return SecretGet(_SecretValue); } set { _SecretValue = SecretSet(value); } }
         private long SecretGet(long secretValue)
         {
@@ -133,10 +153,16 @@ namespace Tools
             return xor;
         }
     }
+    /// <summary>
+    /// 内存加密 string
+    /// </summary>
     public struct SecretString : ISecretValue<string>
     {
         private char[] _SecretValue;
         private int xor;
+        /// <summary>
+        /// Value String
+        /// </summary>
         public string Value { get { return SecretGet(_SecretValue); } set { _SecretValue = SecretSet(value); } }
         private string SecretGet(char[] secretValue)
         {
@@ -172,8 +198,15 @@ namespace Tools
             return ouput;
         }
     }
+    /// <summary>
+    /// ISecretValue
+    /// </summary>
+    /// <typeparam name="T">Struct</typeparam>
     interface ISecretValue<T>
     {
+        /// <summary>
+        /// Value
+        /// </summary>
         T Value { get; set; }
     }
 }

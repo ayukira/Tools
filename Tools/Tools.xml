@@ -125,6 +125,29 @@
             回收整个缓存
             </summary>
         </member>
+        <member name="M:Tools.CommonTools.GetRandom">
+            <summary>
+            Guid.NewGuid().GetHashCode() Seed
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Tools.CommonTools.Parse``1(System.Object,``0)">
+            <summary>
+            通用泛型转换
+            </summary>
+            <typeparam name="T">目标类型</typeparam>
+            <param name="input">输入值</param>
+            <param name="defau">默认值</param>
+        </member>
+        <member name="M:Tools.CommonTools.Parse(System.Object,System.Type,System.Object)">
+            <summary>
+            Parse
+            </summary>
+            <param name="input"></param>
+            <param name="type"></param>
+            <param name="defau"></param>
+            <returns></returns>
+        </member>
         <member name="M:Tools.CommonTools.AutoBase16Encrypt(System.String,System.String[])">
             <summary>
             自定义Base16编码
@@ -145,7 +168,7 @@
             <summary>
             非标准32位MD5
             </summary>
-            <param name="password"></param>
+            <param name="strEnc"></param>
             <returns></returns>
         </member>
         <member name="M:Tools.CommonTools.MD5Encrypt(System.String)">
@@ -168,6 +191,82 @@
             </summary>
             <param name="values"></param>
             <returns></returns>
+        </member>
+        <member name="M:Tools.CommonTools.ToInt(System.String,System.Int32)">
+            <summary>
+            String to Int32
+            </summary>
+            <param name="value"></param>
+            <param name="defvalue"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Tools.CommonTools.ToInt64(System.String,System.Int64)">
+            <summary>
+            String to Int64
+            </summary>
+            <param name="value"></param>
+            <param name="defvalue"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Tools.CommonTools.ToDateTime(System.String)">
+            <summary>
+            String to DateTime
+            </summary>
+            <param name="value"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Tools.CommonTools.ToDateTime(System.String,System.DateTime)">
+            <summary>
+            String to DateTime
+            </summary>
+            <param name="value"></param>
+            <param name="defvalue"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Tools.CommonTools.ToDecimal(System.String,System.Decimal)">
+            <summary>
+            String to Decimal
+            </summary>
+            <param name="value"></param>
+            <param name="defvalue"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Tools.AppConfiguration">
+            <summary>
+            AppConfiguration
+            </summary>
+        </member>
+        <member name="F:Tools.AppConfiguration.OnChange">
+            <summary>
+            AppConfigChangeEvent
+            </summary>
+        </member>
+        <member name="P:Tools.AppConfiguration.Configuration">
+            <summary>
+            AppConfigInstance
+            </summary>
+        </member>
+        <member name="T:Tools.JsonConfiguration">
+            <summary>
+            JsonConfiguration
+            </summary>
+        </member>
+        <member name="F:Tools.JsonConfiguration.OnChange">
+            <summary>
+            ConfigChangeEvent
+            </summary>
+        </member>
+        <member name="P:Tools.JsonConfiguration.Configuration">
+            <summary>
+            ConfigInstance
+            </summary>
+        </member>
+        <member name="M:Tools.JsonConfiguration.#ctor(System.String,System.Boolean)">
+            <summary>
+            ConfigInit
+            </summary>
+            <param name="jsonName"></param>
+            <param name="reloadOnChange"></param>
         </member>
         <member name="T:Tools.DbHelperSQL">
             <summary>
@@ -398,110 +497,6 @@
             引发事件-当前语句必须为"select count(1) from .."格式，如果不存在则继续执行，存在回滚事务
             </summary>
         </member>
-        <member name="T:Tools.HttpTool">
-            <summary>
-            可创建HttpClinet的FactoryTool,只适用于Net Core 2.1以上版本
-            </summary>
-        </member>
-        <member name="P:Tools.HttpTool.Instance">
-            <summary>
-            HttpClinetFactory单例
-            </summary>
-        </member>
-        <member name="M:Tools.HttpTool.GetAsync(System.String)">
-            <summary>
-            简单异步Get请求
-            </summary>
-            <param name="uri"></param>
-            <returns></returns>
-        </member>
-        <member name="M:Tools.HttpTool.PostAsync(System.String,System.Net.Http.HttpContent)">
-            <summary>
-            简单异步Post请求
-            </summary>
-            <param name="uri"></param>
-            <param name="httpContent">请求Content</param>
-            <returns></returns>
-        </member>
-        <member name="M:Tools.HttpTool.GetHttpClient(System.String)">
-            <summary>
-            获得一个HttpClient
-            </summary>
-            <param name="name">ClinetName</param>
-            <returns></returns>
-        </member>
-        <member name="M:Tools.HttpClientExtensions.SetHttpVersion(System.Net.Http.HttpClient,System.Version)">
-            <summary>
-            未实现方法，dotnet core 3.0以上才支持,需要再httpClinet使用前设置
-            </summary>
-            <param name="httpClient"></param>
-            <returns></returns>
-        </member>
-        <member name="T:Tools.JsonHelper">
-            <summary>
-            Newtonsoft.Json
-            </summary>
-        </member>
-        <member name="T:Tools.JsonHelper2">
-            <summary>
-            Text.Json
-            </summary>
-        </member>
-        <member name="T:Tools.DateTimeConverter">
-            <summary>
-            自定义时间格式转换
-            </summary>
-        </member>
-        <member name="T:Tools.DateTimeNullableConverter">
-            <summary>
-            自定义时间格式转换
-            </summary>
-        </member>
-        <member name="M:Tools.ObjExtensions.SimpleCopy``1(``0)">
-            <summary>
-            简单Copy对象,只Copy公共可写属性，且对象有公共构造方法 
-            </summary>
-            <typeparam name="T">对象泛型</typeparam>
-            <param name="obj">需要Copy的对象</param>
-            <returns></returns>
-        </member>
-        <member name="M:Tools.ObjExtensions.ForEachEx``1(System.Collections.Generic.List{``0},System.Action{``0})">
-            <summary>
-            ForEach扩展,空处理
-            </summary>
-            <typeparam name="T"></typeparam>
-            <param name="list"></param>
-            <param name="action"></param>
-        </member>
-        <member name="M:Tools.DateExtensions.ToChString(System.DateTime)">
-            <summary>
-            时间转 yyyy-MM-dd HH:mm:ss
-            </summary>
-            <param name="date"></param>
-            <returns></returns>
-        </member>
-        <member name="M:Tools.DateExtensions.ToTimeStamp(System.DateTime)">
-            <summary>
-            时间转毫秒时间戳
-            </summary>
-            <param name="date"></param>
-            <returns></returns>
-        </member>
-        <member name="M:Tools.DateExtensions.ToTimeStampSecond(System.DateTime)">
-            <summary>
-            时间转秒时间戳
-            </summary>
-            <param name="date"></param>
-            <returns></returns>
-        </member>
-        <member name="M:Tools.StringExtensions.WordCount(System.String,System.Char[])">
-            <summary>
-            计算字符串中单词数量,分割字符' ';'.';'?';';';',' 
-            </summary>
-            <param name="str"></param>
-            <param name="chars">new char[] { ' ', '.', '?',';',','}</param>
-            <returns></returns>
-        </member>
         <member name="M:Tools.ArrayExtensions.ToList``1(``0[])">
             <summary>
             数组转List
@@ -568,14 +563,235 @@
         </member>
         <member name="M:Tools.ArrayExtensions.Add``1(``0[],``0[][])">
             <summary>
-            数组合并 ,通过CopyTo(),数组较大,较大时请使用AddByLq()方法,已做空处理
+            数组合并 ,通过CopyTo(),数组较大时请使用AddByLq()方法,已做空处理
             </summary>
             <typeparam name="T"></typeparam>
             <param name="array">原数组</param>
             <param name="arrList">新增数组</param>
             <returns></returns>
         </member>
-        <member name="M:Tools.ListExtensions.ToSaveQueue``1(System.Collections.Generic.List{``0})">
+        <member name="M:Tools.DateExtensions.ToChString(System.DateTime)">
+            <summary>
+            时间转 yyyy-MM-dd HH:mm:ss
+            </summary>
+            <param name="date"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Tools.DateExtensions.ToTimeStamp(System.DateTime)">
+            <summary>
+            时间转毫秒时间戳
+            </summary>
+            <param name="date"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Tools.DateExtensions.ToTimeStampSecond(System.DateTime)">
+            <summary>
+            时间转秒时间戳
+            </summary>
+            <param name="date"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Tools.DateExtensions.ToDateTime(System.Int64)">
+            <summary>
+            毫秒时间戳转时间
+            </summary>
+            <param name="ts"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Tools.DateExtensions.ToDateTime(System.Int32)">
+            <summary>
+            秒时间戳转时间
+            </summary>
+            <param name="ts"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Tools.DictionaryExtensions.HasData``2(System.Collections.Generic.IDictionary{``0,``1})">
+            <summary>
+            哈希是否有数据
+            </summary>
+            <typeparam name="T"></typeparam>
+            <typeparam name="V"></typeparam>
+            <param name="dic"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Tools.DictionaryExtensions.Values``2(System.Collections.Generic.IDictionary{``0,``1},System.Func{System.Collections.Generic.KeyValuePair{``0,``1},System.Boolean})">
+            <summary>
+            Values
+            </summary>
+            <typeparam name="TKey"></typeparam>
+            <typeparam name="TValue"></typeparam>
+            <param name="that"></param>
+            <param name="func"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Tools.DictionaryExtensions.Keys``2(System.Collections.Generic.IDictionary{``0,``1},System.Func{System.Collections.Generic.KeyValuePair{``0,``1},System.Boolean})">
+            <summary>
+            Keys
+            </summary>
+            <typeparam name="TKey"></typeparam>
+            <typeparam name="TValue"></typeparam>
+            <param name="that"></param>
+            <param name="func"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Tools.DictionaryExtensions.ToDictionary``2(System.Collections.Generic.IDictionary{``0,``1},System.Func{System.Collections.Generic.KeyValuePair{``0,``1},System.Boolean})">
+            <summary>
+            ToDictionary
+            </summary>
+            <param name="that"></param>
+            <param name="func"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Tools.DictionaryExtensions.Set``2(System.Collections.Generic.Dictionary{``0,``1},``0,``1)">
+            <summary>
+            Keys
+            </summary>
+            <typeparam name="TKey"></typeparam>
+            <typeparam name="TValue"></typeparam>
+            <param name="that"></param>
+            <param name="key"></param>
+            <param name="value"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Tools.DictionaryExtensions.Get``2(System.Collections.Generic.Dictionary{``0,``1},``0)">
+            <summary>
+            Get
+            </summary>
+            <typeparam name="TKey"></typeparam>
+            <typeparam name="TValue"></typeparam>
+            <param name="that"></param>
+            <param name="key"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Tools.DictionaryExtensions.Get``3(System.Collections.Generic.Dictionary{``0,``1},``0)">
+            <summary>
+            Get
+            </summary>
+            <typeparam name="TKey"></typeparam>
+            <typeparam name="TValue"></typeparam>
+            <typeparam name="TResult"></typeparam>
+            <param name="that"></param>
+            <param name="key"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Tools.DictionaryExtensions.AddRange``2(System.Collections.Generic.Dictionary{``0,``1},System.Collections.Generic.IDictionary{``0,``1})">
+            <summary>
+            AddRange
+            </summary>
+            <typeparam name="TKey"></typeparam>
+            <typeparam name="TValue"></typeparam>
+            <param name="that"></param>
+            <param name="dic"></param>
+        </member>
+        <member name="M:Tools.DictionaryExtensions.Set``1(System.Collections.Generic.Dictionary{System.String,``0},``0)">
+            <summary>
+            Set
+            </summary>
+            <typeparam name="TBase"></typeparam>
+            <param name="that"></param>
+            <param name="value"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Tools.DictionaryExtensions.Get``1(System.Collections.Generic.Dictionary{System.String,``0})">
+            <summary>
+            Get
+            </summary>
+            <typeparam name="TBase"></typeparam>
+            <param name="that"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Tools.DictionaryExtensions.Set``2(System.Collections.Generic.Dictionary{System.String,``0},``1)">
+            <summary>
+            Set
+            </summary>
+            <typeparam name="TBase"></typeparam>
+            <typeparam name="TSub"></typeparam>
+            <param name="that"></param>
+            <param name="value"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Tools.DictionaryExtensions.Get``2(System.Collections.Generic.Dictionary{System.String,``0})">
+            <summary>
+            Get
+            </summary>
+            <typeparam name="TBase"></typeparam>
+            <typeparam name="TSub"></typeparam>
+            <param name="that"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Tools.DictionaryExtensions.GetOrAdd``2(System.Collections.Generic.Dictionary{``0,``1},``0,System.Func{``0,``1})">
+            <summary>
+            GetOrAdd
+            </summary>
+            <typeparam name="TKey"></typeparam>
+            <typeparam name="TValue"></typeparam>
+            <param name="that"></param>
+            <param name="key"></param>
+            <param name="func"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Tools.DictionaryExtensions.Remove``2(System.Collections.Generic.Dictionary{``0,``1},``0,``1@)">
+            <summary>
+            Remove
+            </summary>
+            <typeparam name="TKey"></typeparam>
+            <typeparam name="TValue"></typeparam>
+            <param name="that"></param>
+            <param name="key"></param>
+            <param name="value"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Tools.DictionaryExtensions.Set``2(System.Collections.Concurrent.ConcurrentDictionary{``0,``1},``0,``1)">
+            <summary>
+            Set
+            </summary>
+            <typeparam name="TKey"></typeparam>
+            <typeparam name="TValue"></typeparam>
+            <param name="that"></param>
+            <param name="key"></param>
+            <param name="value"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Tools.DictionaryExtensions.Get``2(System.Collections.Concurrent.ConcurrentDictionary{``0,``1},``0)">
+            <summary>
+            Get
+            </summary>
+            <typeparam name="TKey"></typeparam>
+            <typeparam name="TValue"></typeparam>
+            <param name="that"></param>
+            <param name="key"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Tools.DictionaryExtensions.Get``3(System.Collections.Concurrent.ConcurrentDictionary{``0,``1},``0)">
+            <summary>
+            Get
+            </summary>
+            <typeparam name="TKey"></typeparam>
+            <typeparam name="TValue"></typeparam>
+            <typeparam name="TResult"></typeparam>
+            <param name="that"></param>
+            <param name="key"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Tools.DictionaryExtensions.AddRange``2(System.Collections.Concurrent.ConcurrentDictionary{``0,``1},System.Collections.Generic.IDictionary{``0,``1})">
+            <summary>
+            AddRange
+            </summary>
+            <typeparam name="TKey"></typeparam>
+            <typeparam name="TValue"></typeparam>
+            <param name="that"></param>
+            <param name="dic"></param>
+        </member>
+        <member name="M:Tools.ListExtensions.Remove``1(System.Collections.Generic.IEnumerable{``0},System.Func{``0,System.Boolean})">
+            <summary>
+            移除符合条件的元素
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="list"></param>
+            <param name="match"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Tools.ListExtensions.ToSaveQueue``1(System.Collections.Generic.IEnumerable{``0})">
             <summary>
             List转线程安全ConcurrentQueue队列
             </summary>
@@ -583,13 +799,211 @@
             <param name="list"></param>
             <returns></returns>
         </member>
-        <member name="M:Tools.ListExtensions.ToSaveBag``1(System.Collections.Generic.List{``0})">
+        <member name="M:Tools.ListExtensions.ToSaveBag``1(System.Collections.Generic.IEnumerable{``0})">
             <summary>
             List转线程安全ConcurrentBag,无序集
             </summary>
             <typeparam name="T"></typeparam>
             <param name="list"></param>
             <returns></returns>
+        </member>
+        <member name="M:Tools.ObjectExtensions.ToSafeString(System.Object)">
+            <summary>
+            安全转换为字符串，去除两端空格，当值为null时返回""
+            </summary>
+            <param name="input">输入值</param>
+        </member>
+        <member name="M:Tools.ObjectExtensions.SimpleCopy``1(``0)">
+            <summary>
+            简单Copy对象,只Copy公共可写属性，且对象有公共构造方法 
+            </summary>
+            <typeparam name="T">对象泛型</typeparam>
+            <param name="obj">需要Copy的对象</param>
+            <returns></returns>
+        </member>
+        <member name="M:Tools.ObjectExtensions.ForEachEx``1(System.Collections.Generic.List{``0},System.Action{``0})">
+            <summary>
+            ForEach扩展,空处理
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="list"></param>
+            <param name="action"></param>
+        </member>
+        <member name="M:Tools.StringExtensions.WordCount(System.String,System.Char[])">
+            <summary>
+            计算字符串中单词数量,分割字符' ';'.';'?';';';',' 
+            </summary>
+            <param name="str"></param>
+            <param name="chars">new char[] { ' ', '.', '?',';',','}</param>
+            <returns></returns>
+        </member>
+        <member name="M:Tools.StringExtensions.IsNullOrEmpty(System.String)">
+            <summary>
+            string.IsNullOrEmpty
+            </summary>
+            <param name="str"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Tools.StringExtensions.IsNullOrWhiteSpace(System.String)">
+            <summary>
+            string.IsNullOrWhiteSpace
+            </summary>
+            <param name="str"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Tools.HttpTool">
+            <summary>
+            可创建HttpClinet的FactoryTool,只适用于Net Core 2.1以上版本
+            </summary>
+        </member>
+        <member name="P:Tools.HttpTool.Instance">
+            <summary>
+            HttpClinetFactory单例
+            </summary>
+        </member>
+        <member name="M:Tools.HttpTool.GetAsync(System.String)">
+            <summary>
+            简单异步Get请求
+            </summary>
+            <param name="uri"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Tools.HttpTool.PostAsync(System.String,System.Net.Http.HttpContent)">
+            <summary>
+            简单异步Post请求
+            </summary>
+            <param name="uri"></param>
+            <param name="httpContent">请求Content</param>
+            <returns></returns>
+        </member>
+        <member name="M:Tools.HttpTool.GetHttpClient(System.String)">
+            <summary>
+            获得一个HttpClient
+            </summary>
+            <param name="name">ClinetName</param>
+            <returns></returns>
+        </member>
+        <member name="M:Tools.HttpClientExtensions.SetHttpVersion(System.Net.Http.HttpClient,System.Version)">
+            <summary>
+            未实现方法，dotnet core 3.0以上才支持,需要再httpClinet使用前设置
+            </summary>
+            <param name="httpClient"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Tools.IJson">
+            <summary>
+            IJson
+            </summary>
+        </member>
+        <member name="M:Tools.IJson.ObjectToJson``1(``0)">
+            <summary>
+            ObjectToJson
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="obj"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Tools.IJson.JsonToModel``1(System.String)">
+            <summary>
+            JsonToModel
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="jsonStr"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Tools.IJson.JsonToObj(System.String)">
+            <summary>
+            JsonToObject
+            </summary>
+            <param name="jsonStr"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Tools.JsonHelper">
+            <summary>
+            Newtonsoft.Json
+            </summary>
+        </member>
+        <member name="T:Tools.JsonHelper2">
+            <summary>
+            Text.Json
+            </summary>
+        </member>
+        <member name="T:Tools.DateTimeConverter">
+            <summary>
+            自定义时间格式转换
+            </summary>
+        </member>
+        <member name="T:Tools.DateTimeNullableConverter">
+            <summary>
+            自定义时间格式转换
+            </summary>
+        </member>
+        <member name="T:Tools.SecretFloat">
+            <summary>
+            内存加密 float
+            </summary>
+        </member>
+        <member name="P:Tools.SecretFloat.Value">
+            <summary>
+            Value float
+            </summary>
+        </member>
+        <member name="T:Tools.SecretDouble">
+            <summary>
+            内存加密 double
+            </summary>
+        </member>
+        <member name="P:Tools.SecretDouble.Value">
+            <summary>
+            Value double
+            </summary>
+        </member>
+        <member name="T:Tools.SecretInt">
+            <summary>
+            内存加密 int
+            </summary>
+        </member>
+        <member name="P:Tools.SecretInt.Value">
+            <summary>
+            Value int
+            </summary>
+        </member>
+        <member name="T:Tools.SecretLong">
+            <summary>
+            内存加密 long
+            </summary>
+        </member>
+        <member name="P:Tools.SecretLong.Value">
+            <summary>
+            Value long
+            </summary>
+        </member>
+        <member name="T:Tools.SecretString">
+            <summary>
+            内存加密 string
+            </summary>
+        </member>
+        <member name="P:Tools.SecretString.Value">
+            <summary>
+            Value String
+            </summary>
+        </member>
+        <member name="T:Tools.ISecretValue`1">
+            <summary>
+            ISecretValue
+            </summary>
+            <typeparam name="T">Struct</typeparam>
+        </member>
+        <member name="P:Tools.ISecretValue`1.Value">
+            <summary>
+            Value
+            </summary>
+        </member>
+        <member name="T:Tools.ModelHandler`1">
+            <summary>
+            DataTable与实体类互相转换
+            </summary>
+            <typeparam name="T"></typeparam>
         </member>
         <member name="M:Tools.ModelHandler`1.FillModel(System.Data.DataSet)">
             <summary>

@@ -1,97 +1,9 @@
-using System;
-using System.Collections.Concurrent;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 
 namespace Tools
 {
-    public static class ObjExtensions
-    {
-        /// <summary>
-        /// 简单Copy对象,只Copy公共可写属性，且对象有公共构造方法 
-        /// </summary>
-        /// <typeparam name="T">对象泛型</typeparam>
-        /// <param name="obj">需要Copy的对象</param>
-        /// <returns></returns>
-        public static T SimpleCopy<T>(this T obj) where T : new()
-        {
-            T t = new T();
-            foreach (var p in obj.GetType().GetProperties())
-            {
-                if (p.CanWrite)
-                {
-                    var name = p.Name;
-                    var value = p.GetValue(obj, null);
-                    t.GetType().GetProperty(name).SetValue(t, value);
-                }
-            }
-            return t;
-        }
-        /// <summary>
-        /// ForEach扩展,空处理
-        /// </summary>
-        /// <typeparam name="T"></typeparam>
-        /// <param name="list"></param>
-        /// <param name="action"></param>
-        public static void ForEachEx<T>(this List<T> list, Action<T> action)
-        {
-            if (list != null)
-            {
-                list.ForEach(action);
-            }
-        }
-    }
-    public static class DateExtensions
-    {
-        private readonly static DateTime _dt1970 = new DateTime(1970, 1, 1);
-        /// <summary>
-        /// 时间转 yyyy-MM-dd HH:mm:ss
-        /// </summary>
-        /// <param name="date"></param>
-        /// <returns></returns>
-        public static string ToChString(this DateTime date)
-        {
-            return date.ToString("yyyy-MM-dd HH:mm:ss");
-        }
-        /// <summary>
-        /// 时间转毫秒时间戳
-        /// </summary>
-        /// <param name="date"></param>
-        /// <returns></returns>
-        public static long ToTimeStamp(this DateTime date)
-        {
-            TimeSpan ts = date.ToLocalTime().Subtract(_dt1970.ToLocalTime());
-            return Convert.ToInt64(ts.TotalMilliseconds);
-        }
-        /// <summary>
-        /// 时间转秒时间戳
-        /// </summary>
-        /// <param name="date"></param>
-        /// <returns></returns>
-        public static int ToTimeStampSecond(this DateTime date)
-        {
-            TimeSpan ts = date.ToLocalTime().Subtract(_dt1970.ToLocalTime());
-            return Convert.ToInt32(ts.TotalSeconds);
-        }
-    }
-    public static class StringExtensions
-    {
-        /// <summary>
-        /// 计算字符串中单词数量,分割字符' ';'.';'?';';';',' 
-        /// </summary>
-        /// <param name="str"></param>
-        /// <param name="chars">new char[] { ' ', '.', '?',';',','}</param>
-        /// <returns></returns>
-        public static int WordCount(this string str, char[] chars = null)
-        {
-            if (chars == null)
-            {
-                chars = new char[] { ' ', '.', '?', ';', ',' };
-            }
-            return str.Split(chars, StringSplitOptions.RemoveEmptyEntries).Length;
-        }
-    }
     public static class ArrayExtensions
     {
         /// <summary>
@@ -109,17 +21,6 @@ namespace Tools
                 list.Add(arr[i]);
             }
             return list;
-        }
-        public static T[] ArrayAdd<T>(this T[] arr1, T[] arr2)
-        {
-            if (arr1 == null) return arr1;
-            if (arr2 == null) return arr1;
-            if (arr2.Length <= 0) return arr1;
-            int index = arr1.Length + arr2.Length;
-            var newArr = new T[index];
-            arr1.CopyTo(newArr, 0);
-            arr2.CopyTo(newArr, arr1.Length);
-            return newArr;
         }
         /// <summary>
         /// 截取数组元素,Span方式操作数组
@@ -183,6 +84,7 @@ namespace Tools
         /// <returns></returns>
         private static T[] Append<T>(this T[] arr1, T[] arr2)
         {
+            if (arr2.Length <= 0) return arr1;
             int index = arr1.Length + arr2.Length;
             var arr = new T[index];
             arr1.CopyTo(arr, 0);
@@ -212,7 +114,7 @@ namespace Tools
             return result.ToArray();
         }
         /// <summary>
-        /// 数组合并 ,通过CopyTo(),数组较大,较大时请使用AddByLq()方法,已做空处理
+        /// 数组合并 ,通过CopyTo(),数组较大时请使用AddByLq()方法,已做空处理
         /// </summary>
         /// <typeparam name="T"></typeparam>
         /// <param name="array">原数组</param>
@@ -232,45 +134,6 @@ namespace Tools
                 }
             }
             return result;
-        }
-    }
-    public static class ListExtensions
-    {
-        /// <summary>
-        /// List转线程安全ConcurrentQueue队列
-        /// </summary>
-        /// <typeparam name="T"></typeparam>
-        /// <param name="list"></param>
-        /// <returns></returns>
-        public static ConcurrentQueue<T> ToSaveQueue<T>(List<T> list)
-        {
-            ConcurrentQueue<T> queue = new ConcurrentQueue<T>();
-            if (list != null)
-            {
-                list.ForEach(x =>
-                {
-                    queue.Enqueue(x);
-                });
-            }
-            return queue;
-        }
-        /// <summary>
-        /// List转线程安全ConcurrentBag,无序集
-        /// </summary>
-        /// <typeparam name="T"></typeparam>
-        /// <param name="list"></param>
-        /// <returns></returns>
-        public static ConcurrentBag<T> ToSaveBag<T>(List<T> list)
-        {
-            ConcurrentBag<T> bag = new ConcurrentBag<T>();
-            if (list != null)
-            {
-                list.ForEach(x =>
-                {
-                    bag.Add(x);
-                });
-            }
-            return bag;
         }
     }
 }

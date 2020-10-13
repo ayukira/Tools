@@ -5,7 +5,10 @@ using System.Reflection;
 
 namespace Tools
 {
-    // DataTable与实体类互相转换
+    /// <summary>
+    /// DataTable与实体类互相转换
+    /// </summary>
+    /// <typeparam name="T"></typeparam>
     public class ModelHandler<T> where T : new()
     {
         #region DataTable转换成实体类
