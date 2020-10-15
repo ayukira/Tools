@@ -148,43 +148,6 @@
             <param name="defau"></param>
             <returns></returns>
         </member>
-        <member name="M:Tools.CommonTools.AutoBase16Encrypt(System.String,System.String[])">
-            <summary>
-            自定义Base16编码
-            </summary>
-            <param name="str">需要编码的字符串</param>
-            <param name="autoCode">自定义Base16编码数组,16个元素,可以为数字、字符、特殊符号,若不填,使用默认的Base16编码数组,解码与编码的Base16编码数组一样</param>
-            <returns></returns>
-        </member>
-        <member name="M:Tools.CommonTools.AutoBase16Decrypt(System.String,System.String[])">
-            <summary>
-            自定义Base16解码
-            </summary>
-            <param name="str">需要解码的字符串</param>
-            <param name="autoCode">自定义Base16编码数组,16个元素,可以为数字、字符、特殊符号,若不填,使用默认的Base16编码数组,解码与编码的Base16编码数组一样</param>
-            <returns></returns>
-        </member>
-        <member name="M:Tools.CommonTools.MD5Encrypt32(System.String)">
-            <summary>
-            非标准32位MD5
-            </summary>
-            <param name="strEnc"></param>
-            <returns></returns>
-        </member>
-        <member name="M:Tools.CommonTools.MD5Encrypt(System.String)">
-            <summary>
-            标准32位MD5
-            </summary>
-            <param name="strEnc"></param>
-            <returns></returns>
-        </member>
-        <member name="M:Tools.CommonTools.Xor(System.String)">
-            <summary>
-            字符串简单异或运算,可逆
-            </summary>
-            <param name="input">输入字符串</param>
-            <returns></returns>
-        </member>
         <member name="M:Tools.CommonTools.RemoveDup``1(``0[])">
             <summary>
             删除数组中的重复项
@@ -495,6 +458,148 @@
         <member name="F:Tools.EffentNextType.SolicitationEvent">
             <summary>
             引发事件-当前语句必须为"select count(1) from .."格式，如果不存在则继续执行，存在回滚事务
+            </summary>
+        </member>
+        <member name="F:Tools.AESEncrypt.AES_IV">
+            <summary>
+            128位0向量
+            </summary>
+        </member>
+        <member name="M:Tools.AESEncrypt.Encrypt(System.String,System.String,System.Text.Encoding)">
+            <summary>
+            AES加密
+            </summary>
+            <param name="dataStr"></param>
+            <param name="encryptKey"></param>
+            <param name="encoding"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Tools.AESEncrypt.Encrypt(System.String,System.String,System.Text.Encoding,System.Byte[])">
+            <summary>
+            AES加密
+            </summary>
+            <param name="dataStr"></param>
+            <param name="encryptKey"></param>
+            <param name="encoding"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Tools.AESEncrypt.Decrypt(System.String,System.String,System.Text.Encoding)">
+            <summary>
+            AES解密
+            </summary>
+            <param name="dataStr"></param>
+            <param name="encryptKey"></param>
+            <param name="encoding"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Tools.AESEncrypt.Decrypt(System.String,System.String,System.Text.Encoding,System.Byte[])">
+            <summary>
+            AES解密
+            </summary>
+            <param name="dataStr"></param>
+            <param name="encryptKey"></param>
+            <param name="encoding"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Tools.AESEncrypt.InitIv(System.Int32)">
+            <summary>
+            初始化向量
+            </summary>
+            <param name="blockSize"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Tools.AESEncrypt.GenerateAESKey">
+            <summary>
+            随机生成32位AESkey
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Tools.Base16Encrypt.AutoBase16Encrypt(System.String,System.String[])">
+            <summary>
+            自定义Base16编码
+            </summary>
+            <param name="str">需要编码的字符串</param>
+            <param name="autoCode">自定义Base16编码数组,16个元素,可以为数字、字符、特殊符号,若不填,使用默认的Base16编码数组,解码与编码的Base16编码数组一样</param>
+            <returns></returns>
+        </member>
+        <member name="M:Tools.Base16Encrypt.AutoBase16Decrypt(System.String,System.String[])">
+            <summary>
+            自定义Base16解码
+            </summary>
+            <param name="str">需要解码的字符串</param>
+            <param name="autoCode">自定义Base16编码数组,16个元素,可以为数字、字符、特殊符号,若不填,使用默认的Base16编码数组,解码与编码的Base16编码数组一样</param>
+            <returns></returns>
+        </member>
+        <member name="M:Tools.CommonEncrypt.Xor(System.String,System.UInt32)">
+            <summary>
+            字符串简单异或运算,可逆
+            </summary>
+            <param name="input"></param>
+            <param name="xorCode"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Tools.DESEncrypt.DesEncrypt(System.String,System.String)">
+            <summary>
+            加密字符串
+            </summary>
+            <param name="strText">明文</param>
+            <param name="encryptKey">密钥</param>
+            <returns></returns>
+        </member>
+        <member name="M:Tools.DESEncrypt.DesDecrypt(System.String,System.String)">
+            <summary>
+            解密字符串
+            </summary>
+            <param name="strText">密文</param>
+            <param name="decryptKey">密钥</param>
+            <returns></returns>
+        </member>
+        <member name="M:Tools.MD5Encrypt.Sign(System.String,System.String,System.Text.Encoding)">
+            <summary>
+            签名字符串
+            </summary>
+            <param name="dataStr">需要签名的字符串</param>
+            <param name="encryptKey">密钥</param>
+            <param name="encoding">编码格式</param>
+            <returns>签名结果</returns>
+        </member>
+        <member name="M:Tools.MD5Encrypt.Verify(System.String,System.String,System.String,System.Text.Encoding)">
+            <summary>
+            验证签名
+            </summary>
+            <param name="dataStr">需要签名的字符串</param>
+            <param name="sign">签名结果</param>
+            <param name="encryptKey">密钥</param>
+            <param name="encoding">编码格式</param>
+            <returns>验证结果</returns>
+        </member>
+        <member name="M:Tools.MD5Encrypt.MD5EncryptSpecial(System.String)">
+            <summary>
+            非标准32位MD5
+            </summary>
+            <param name="strEnc"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Tools.MD5Encrypt.MD5Encrypt32(System.String)">
+            <summary>
+            标准32位MD5
+            </summary>
+            <param name="strEnc"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Tools.SHAEncrypt.Sha1(System.String,System.Text.Encoding)">
+            <summary>
+            SHA1 加密
+            </summary>
+        </member>
+        <member name="M:Tools.SHAEncrypt.Sha256(System.String,System.Text.Encoding)">
+            <summary>
+            SHA256 加密
+            </summary>
+        </member>
+        <member name="M:Tools.SHAEncrypt.Sha512(System.String,System.Text.Encoding)">
+            <summary>
+            SHA512 加密
             </summary>
         </member>
         <member name="M:Tools.ArrayExtensions.ToList``1(``0[])">

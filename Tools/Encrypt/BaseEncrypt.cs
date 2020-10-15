@@ -58,4 +58,44 @@ namespace Tools
             return dnStr;
         }
     }
+    public class Base64Encrypt
+    {
+        public static string Encode(string input)
+        {
+            return Encode(input, Encoding.UTF8);
+        }
+        public static string Decode(string input)
+        {
+            return Decode(input, Encoding.UTF8);
+        }
+
+        public static string Encode(string input, Encoding encodeType)
+        {
+            string encode = string.Empty;
+            byte[] bytes = encodeType.GetBytes(input);
+            try
+            {
+                encode = Convert.ToBase64String(bytes);
+            }
+            catch
+            {
+                encode = input;
+            }
+            return encode;
+        }
+        public static string Decode(string input, Encoding encodeType)
+        {
+            string decode = string.Empty;
+            byte[] bytes = Convert.FromBase64String(input);
+            try
+            {
+                decode = encodeType.GetString(bytes);
+            }
+            catch
+            {
+                decode = input;
+            }
+            return decode;
+        }
+    }
 }
