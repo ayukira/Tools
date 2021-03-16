@@ -9,7 +9,7 @@ namespace Tools
     /// DataTable与实体类互相转换
     /// </summary>
     /// <typeparam name="T"></typeparam>
-    public class ModelHandler<T> where T : new()
+    public class ModelTool<T> where T : new()
     {
         #region DataTable转换成实体类
         /// <summary>

@@ -6,6 +6,9 @@ using System.Text;
 
 namespace Tools
 {
+    /// <summary>
+    /// DictionaryExtensions
+    /// </summary>
     public static class DictionaryExtensions
     {
         #region IDictionary

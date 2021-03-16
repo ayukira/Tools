@@ -214,6 +214,16 @@
             JsonConfiguration
             </summary>
         </member>
+        <member name="F:Tools.JsonConfiguration.Time">
+            <summary>
+            Skip Time
+            </summary>
+        </member>
+        <member name="F:Tools.JsonConfiguration.ChangeTime">
+            <summary>
+            Last ChangeTime
+            </summary>
+        </member>
         <member name="F:Tools.JsonConfiguration.OnChange">
             <summary>
             ConfigChangeEvent
@@ -709,6 +719,11 @@
             </summary>
             <param name="ts"></param>
             <returns></returns>
+        </member>
+        <member name="T:Tools.DictionaryExtensions">
+            <summary>
+            DictionaryExtensions
+            </summary>
         </member>
         <member name="M:Tools.DictionaryExtensions.HasData``2(System.Collections.Generic.IDictionary{``0,``1})">
             <summary>

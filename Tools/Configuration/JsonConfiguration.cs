@@ -1,10 +1,7 @@
-using System;
-using System.Collections.Generic;
-using System.Text;
-using System.Threading;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Configuration.Json;
 using Microsoft.Extensions.Primitives;
+using System;
 
 namespace Tools
 {
@@ -41,7 +38,13 @@ namespace Tools
     /// </summary>
     public class JsonConfiguration
     {
-        public const uint Time = 500;
+        /// <summary>
+        /// Skip Time
+        /// </summary>
+        public const uint Time = 150;
+        /// <summary>
+        /// Last ChangeTime
+        /// </summary>
         public long ChangeTime = 0;
         /// <summary>
         /// ConfigChangeEvent
